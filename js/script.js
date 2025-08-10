@@ -180,9 +180,8 @@ for (let i = 0; i < allMusic.length; i++) {
                 <div class="row">
                   <span>${allMusic[i].name}</span>
 
-                  <span>${allMusic[i].separator}</span>
+                  <p class="separator"> - </p>
 
-                            
                   <p>${allMusic[i].artist}</p>
                 </div>
                 <span id="${allMusic[i].src}" class="audio-duration">3:40</span>
