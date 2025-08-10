@@ -87,7 +87,7 @@ mainAudio.addEventListener("timeupdate", (e)=>{
   progressBar.style.width = `${progressWidth}%`;
 
   let musicCurrentTime = wrapper.querySelector(".current-time"),
-  musicDuartion = wrapper.querySelector(".max-duration");
+  musicDuration = wrapper.querySelector(".max-duration");
   mainAudio.addEventListener("loadeddata", ()=>{
    
     let mainAdDuration = mainAudio.duration;
@@ -96,7 +96,7 @@ mainAudio.addEventListener("timeupdate", (e)=>{
     if(totalSec < 10){ 
       totalSec = `0${totalSec}`;
     }
-    musicDuartion.innerText = `${totalMin}:${totalSec}`;
+    musicDuration.innerText = `${totalMin}:${totalSec}`;
   });
   
   let currentMin = Math.floor(currentTime / 60);
@@ -186,7 +186,7 @@ for (let i = 0; i < allMusic.length; i++) {
               </li>`;
   ulTag.insertAdjacentHTML("beforeend", liTag); 
 
-  let liAudioDuartionTag = ulTag.querySelector(`#${allMusic[i].src}`);
+  let liAudioDurationTag = ulTag.querySelector(`#${allMusic[i].src}`);
   let liAudioTag = ulTag.querySelector(`.${allMusic[i].src}`);
   liAudioTag.addEventListener("loadeddata", ()=>{
     let duration = liAudioTag.duration;
@@ -195,8 +195,8 @@ for (let i = 0; i < allMusic.length; i++) {
     if(totalSec < 10){ 
       totalSec = `0${totalSec}`;
     };
-    liAudioDuartionTag.innerText = `${totalMin}:${totalSec}`; 
-    liAudioDuartionTag.setAttribute("t-duration", `${totalMin}:${totalSec}`); 
+    liAudioDurationTag.innerText = `${totalMin}:${totalSec}`; 
+    liAudioDurationTag.setAttribute("t-duration", `${totalMin}:${totalSec}`); 
   });
 }
 
