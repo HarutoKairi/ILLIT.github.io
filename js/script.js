@@ -180,7 +180,7 @@ for (let i = 0; i < allMusic.length; i++) {
                 <div class="row">
                   <span>${allMusic[i].name}</span>
 
-                            <span class="separator">${music.separator}</span>
+                            <span class="separator"> - </span>
                             
                   <p>${allMusic[i].artist}</p>
                 </div>
