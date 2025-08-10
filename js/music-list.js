@@ -6,14 +6,14 @@ let allMusic = [
     src: "music-1"
   },
   {
-    name: "",
-    artist: "",
+    name: "Lucky Girl Syndrome",
+    artist: "ILLIT",
     img: "music-2",
     src: "music-2"
   },
   {
     name: "",
-    artist: "",
+    artist: "ILLIT",
     img: "music-3",
     src: "music-3"
   },
