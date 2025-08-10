@@ -18,5 +18,26 @@ let allMusic = [
     src: "music-3"
   },
 
+  {
+    name: "My World",
+    artist: "ILLIT",
+    img: "music-3",
+    src: "music-4"
+  },
+
+    {
+    name: "Tick Tack",
+    artist: "ILLIT",
+    img: "music-5",
+    src: "music-5"
+  },
+
+    {
+    name: "Little Monster",
+    artist: "ILLIT",
+    img: "music-6",
+    src: "music-6"
+  },
+  
 ];
 
