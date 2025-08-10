@@ -601,93 +601,64 @@
     </div>
     
     <!-- Player Tab -->
-    <div id="player-tab" class="tab-content active">
-      <div class="wrapper">
+  <div class="wrapper">
         <div class="top-bar">
-          <i class="material-icons">expand_more</i>
-          <span>Đang phát bài</span>
-          <i class="material-icons">more_horiz</i>
+            <i class="material-icons">expand_more</i>
+            <span>Đang phát bài</span>
+            <i class="material-icons">more_horiz</i>
         </div>
 
         <div class="img-area">
-          <img src="https://i.ibb.co/6mK6y0F/illit-magnetic.jpg" alt="ILLIT Magnetic">
+            <img src="" alt="">
+          
         </div>
 
         <div class="song-details">
-          <p class="name">Magnetic</p>
-          <p class="artist">ILLIT</p>
+            <p class="name"></p>
+            <p class="artist"></p>
         </div>
 
         <div class="progress-area">
-          <div class="progress-bar">
-            <div class="progress"></div>
-          </div>
-          <div class="song-timer">
-            <span class="current-time">0:00</span>
-            <span class="max-duration">3:10</span>
-          </div>
+            <div class="progress-bar">
+                <audio src="" id="main-audio"></audio>
+            </div>
+            <div class="song-timer">
+                <span class="current-time">
+                    0:00
+                </span>
+                <span class="max-duration">
+                    0:00
+                </span>
+            </div>
         </div>
 
         <div class="controls">
-          <i id="repeat-plist" class="material-icons" title="Playlist looped">repeat</i>
-          <i id="prev" class="material-icons">skip_previous</i>
-          <div class="play-pause">
-            <i class="material-icons play">play_arrow</i>
-          </div>
-          <i id="next" class="material-icons">skip_next</i>
-          <i id="more-music" class="material-icons">queue_music</i>
+            <i id="repeat-plist" class="material-icons" title="Playlist looped">repeat</i>
+            <i id="prev" class="material-icons" >skip_previous</i>
+            <div class="play-pause">
+                <i class="material-icons play" >play_arrow</i>
+            </div>
+            <i id="next" class="material-icons" >skip_next</i>
+            <i id="more-music" class="material-icons" >queue_music</i>
         </div>
 
         <div class="music-list">
-          <div class="header">
-            <div class="row">
-              <i class="list material-icons">queue_music</i>
-              <span>Danh sách bài hát</span>
+            <div class="header">
+                <div class="row">
+                    <i class="list material-icons">queue_music</i>
+                    <span>Danh sách bài hát</span>
+                </div>
+                <i id="close" class="material-icons">close</i>
             </div>
-            <i id="close" class="material-icons">close</i>
-          </div>
-          <ul>
-            <li class="playing">
-              <div class="row">
-                <div class="details">
-                  <span class="name">Magnetic</span>
-                  <span class="artist">ILLIT</span>
-                </div>
-                <span class="audio-duration">3:10</span>
-              </div>
-            </li>
-            <li>
-              <div class="row">
-                <div class="details">
-                  <span class="name">Lucky Girl Syndrome</span>
-                  <span class="artist">ILLIT</span>
-                </div>
-                <span class="audio-duration">2:55</span>
-              </div>
-            </li>
-            <li>
-              <div class="row">
-                <div class="details">
-                  <span class="name">My World</span>
-                  <span class="artist">ILLIT</span>
-                </div>
-                <span class="audio-duration">3:22</span>
-              </div>
-            </li>
-            <li>
-              <div class="row">
-                <div class="details">
-                  <span class="name">Midnight Fiction</span>
-                  <span class="artist">ILLIT</span>
-                </div>
-                <span class="audio-duration">3:05</span>
-              </div>
-            </li>
-          </ul>
+            <ul>
+              
+            </ul>
         </div>
-      </div>
     </div>
-    
+
+    <script src="./js/music-list.js"></script>
+    <script src="./js/script.js"></script>
+
     <!-- Info Tab -->
     <div id="info-tab" class="tab-content">
       <div class="info-tab">
