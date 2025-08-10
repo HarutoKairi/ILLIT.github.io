@@ -38,6 +38,15 @@ let allMusic = [
     img: "music-6",
     src: "music-6"
   },
+
+  {
+    name: "Billyeoon Goyangi (Do the Dance)",
+    artist: "ILLIT",
+    img: "music-7",
+    src: "Billyeoon Goyangi (Do the Dance)"
+  },
+  
+
   
 ];
 
