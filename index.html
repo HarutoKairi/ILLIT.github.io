@@ -7,6 +7,10 @@
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <style>
+    html, body {
+      height: 100%;
+    }
+    
     body {
       background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
       background-attachment: fixed;
@@ -17,6 +21,8 @@
       color: #ffffff;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       position: relative;
+      display: flex;
+      flex-direction: column;
     }
     
     body::before {
@@ -36,40 +42,42 @@
     .wrapper {
       position: relative;
       z-index: 1;
-      max-width: 500px;
+      max-width: 600px; /* Rộng hơn trước */
+      width: 90%; /* Chiều rộng linh hoạt */
       margin: 20px auto;
-      padding: 20px;
+      padding: 25px;
       background: rgba(25, 25, 45, 0.7);
       backdrop-filter: blur(10px);
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       border: 1px solid rgba(255, 255, 255, 0.1);
+      flex: 1 0 auto; /* Chiếm không gian còn lại */
     }
     
     .illit-info {
       text-align: center;
       margin-bottom: 25px;
-      padding: 20px;
+      padding: 25px; /* Tăng padding */
       border-radius: 15px;
       background: rgba(255, 255, 255, 0.05);
     }
     
     .illit-logo {
-      font-size: 3rem;
+      font-size: 3.5rem; /* Tăng kích thước */
       font-weight: bold;
       background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      margin-bottom: 15px;
+      margin-bottom: 20px;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
     
     .illit-description {
-      font-size: 0.95rem;
+      font-size: 1rem; /* Tăng kích thước chữ */
       color: #e0e0ff;
-      line-height: 1.6;
-      margin-bottom: 15px;
+      line-height: 1.7; /* Tăng khoảng cách dòng */
+      margin-bottom: 20px;
       text-align: left;
     }
     
@@ -77,27 +85,28 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 15px;
-      margin: 20px 0;
+      gap: 20px; /* Tăng khoảng cách */
+      margin: 25px 0;
     }
     
     .highlight-card {
       background: rgba(251, 194, 235, 0.1);
-      border-radius: 10px;
-      padding: 12px;
-      min-width: 120px;
+      border-radius: 12px; /* Bo góc hơn */
+      padding: 15px; /* Tăng padding */
+      min-width: 140px; /* Rộng hơn */
       text-align: center;
+      flex: 1;
     }
     
     .highlight-value {
       font-weight: bold;
-      font-size: 1.1rem;
+      font-size: 1.3rem; /* Tăng kích thước */
       color: #fbc2eb;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
     }
     
     .highlight-label {
-      font-size: 0.8rem;
+      font-size: 0.9rem; /* Tăng kích thước */
       color: #a6c1ee;
     }
     
@@ -105,27 +114,26 @@
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 15px;
-      margin-top: 15px;
+      gap: 20px; /* Tăng khoảng cách */
+      margin-top: 20px;
     }
     
     .member {
-      width: 70px;
+      width: 85px; /* Rộng hơn */
       text-align: center;
-      font-size: 0.8rem;
-      position: relative;
+      font-size: 0.85rem; /* Tăng kích thước */
     }
     
     .member-img {
-      width: 50px;
-      height: 50px;
+      width: 60px; /* To hơn */
+      height: 60px; /* To hơn */
       border-radius: 50%;
-      margin: 0 auto 5px;
+      margin: 0 auto 8px;
       background: linear-gradient(45deg, #ff9a9e, #fad0c4);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.5rem; /* Tăng kích thước */
       color: white;
       position: relative;
       overflow: hidden;
@@ -133,68 +141,72 @@
     
     .member-name {
       font-weight: bold;
-      margin-bottom: 2px;
+      margin-bottom: 3px;
+      font-size: 0.95rem; /* Tăng kích thước */
     }
     
     .member-position {
-      font-size: 0.7rem;
+      font-size: 0.75rem; /* Tăng kích thước */
       color: #a6c1ee;
     }
     
     .credit-footer {
       text-align: center;
-      padding: 20px 0;
+      padding: 25px 15px; /* Tăng padding */
       color: #aaa;
-      font-size: 0.9rem;
-      max-width: 500px;
-      margin: 20px auto;
+      font-size: 0.95rem; /* Tăng kích thước */
+      width: 100%;
+      flex-shrink: 0; /* Luôn ở cuối trang */
+      background: rgba(0, 0, 0, 0.3); /* Thêm nền */
+      backdrop-filter: blur(5px);
     }
     
     .designer-credit {
-      margin-top: 10px;
-      padding: 8px 15px;
+      margin-top: 15px;
+      padding: 10px 20px; /* Tăng padding */
       background: rgba(255, 119, 0, 0.1);
-      border-radius: 10px;
+      border-radius: 12px; /* Bo góc hơn */
       display: inline-block;
       color: #ff7700;
+      font-size: 1rem; /* Tăng kích thước */
     }
     
     .section-title {
-      font-size: 1.2rem;
+      font-size: 1.3rem; /* Tăng kích thước */
       font-weight: bold;
       color: #fbc2eb;
-      margin: 15px 0 10px;
+      margin: 20px 0 15px; /* Tăng khoảng cách */
       text-align: left;
-      border-left: 3px solid #fbc2eb;
-      padding-left: 10px;
+      border-left: 4px solid #fbc2eb; /* Dày hơn */
+      padding-left: 15px; /* Tăng padding */
     }
     
     .discography {
-      margin-top: 15px;
-      padding: 10px;
+      margin-top: 20px;
+      padding: 15px; /* Tăng padding */
       background: rgba(255, 255, 255, 0.03);
-      border-radius: 10px;
+      border-radius: 12px; /* Bo góc hơn */
     }
     
     .album {
       display: flex;
       align-items: center;
-      margin-bottom: 10px;
-      padding: 8px;
-      border-radius: 8px;
+      margin-bottom: 12px;
+      padding: 12px; /* Tăng padding */
+      border-radius: 10px; /* Bo góc hơn */
       background: rgba(255, 255, 255, 0.05);
     }
     
     .album-cover {
-      width: 40px;
-      height: 40px;
-      border-radius: 5px;
+      width: 50px; /* To hơn */
+      height: 50px; /* To hơn */
+      border-radius: 8px; /* Bo góc hơn */
       background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-      margin-right: 10px;
+      margin-right: 15px; /* Tăng khoảng cách */
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.5rem;
+      font-size: 1.8rem; /* Tăng kích thước */
       color: white;
     }
     
@@ -204,12 +216,57 @@
     
     .album-title {
       font-weight: bold;
-      font-size: 0.9rem;
+      font-size: 1rem; /* Tăng kích thước */
     }
     
     .album-date {
-      font-size: 0.8rem;
+      font-size: 0.85rem; /* Tăng kích thước */
       color: #a6c1ee;
+    }
+
+    /* Phần player */
+    .top-bar {
+      padding: 15px 0; /* Tăng padding */
+    }
+    
+    .img-area {
+      margin: 20px auto; /* Tăng khoảng cách */
+    }
+    
+    .song-details {
+      margin: 20px 0; /* Tăng khoảng cách */
+    }
+    
+    .song-details .name {
+      font-size: 1.5rem; /* Tăng kích thước */
+    }
+    
+    .song-details .artist {
+      font-size: 1.1rem; /* Tăng kích thước */
+    }
+    
+    .progress-area {
+      margin: 25px 0; /* Tăng khoảng cách */
+    }
+    
+    .controls {
+      margin: 25px 0; /* Tăng khoảng cách */
+    }
+    
+    .controls i.material-icons {
+      font-size: 2rem; /* Tăng kích thước icon */
+    }
+    
+    .play-pause i.material-icons {
+      font-size: 2.5rem; /* Tăng kích thước nút play */
+    }
+    
+    .music-list {
+      padding: 20px; /* Tăng padding */
+    }
+    
+    .music-list .header {
+      padding: 15px; /* Tăng padding */
     }
   </style>
 </head>
@@ -343,6 +400,7 @@
     </div>
   </div>
 
+  <!-- Đã di chuyển phần tác giả xuống dưới cùng -->
   <div class="credit-footer">
     <p>© 2024 ILLIT Music Player | BELIFT LAB</p>
     <div class="designer-credit">
