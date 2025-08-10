@@ -89,13 +89,6 @@ body {
 }
 
 
-.song-details .separator {
-      display: inline-block;
-      margin: 0 5px;
-      color: #a29ebd;
-    }
-
-
 .song-details .artist {
   font-size: 18px;
   opacity: 0.9;
