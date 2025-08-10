@@ -21,7 +21,7 @@ let allMusic = [
   {
     name: "My World",
     artist: "ILLIT",
-    img: "music-3",
+    img: "music-4",
     src: "music-4"
   },
 
