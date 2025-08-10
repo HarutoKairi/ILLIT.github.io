@@ -45,6 +45,14 @@ let allMusic = [
     img: "music-7",
     src: "music-7"
   },
+
+
+    {
+    name: "Jellyous",
+    artist: "ILLIT",
+    img: "music-8",
+    src: "Jellyous"
+  },
   
 
   
