@@ -43,7 +43,7 @@ let allMusic = [
     name: "Billyeoon Goyangi (Do the Dance)",
     artist: "ILLIT",
     img: "music-7",
-    src: "Billyeoon Goyangi (Do the Dance)"
+    src: "music-7"
   },
   
 
