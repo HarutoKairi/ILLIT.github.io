@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ILLIT - Magnetic Music Player</title>
+  <title>ILLIT - Music Player</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -605,55 +605,63 @@
     <div id="player-tab" class="tab-content active">
       <div class="wrapper">
         <div class="top-bar">
-          <i class="material-icons">expand_more</i>
-          <span>Đang phát bài</span>
-          <i class="material-icons">more_horiz</i>
+            <i class="material-icons">expand_more</i>
+            <span>Đang phát bài</span>
+            <i class="material-icons">more_horiz</i>
         </div>
 
         <div class="img-area">
-          <img src="https://i.ibb.co/6mK6y0F/illit-magnetic.jpg" alt="ILLIT Magnetic">
+            <img src="" alt="">
+          
         </div>
 
         <div class="song-details">
-          <p class="name">Magnetic</p>
-          <p class="artist">ILLIT</p>
+            <p class="name"></p>
+            <p class="artist"></p>
         </div>
 
         <div class="progress-area">
-          <div class="progress-bar">
-            <div class="progress"></div>
-            <audio src="" id="main-audio" style="display: none;"></audio>
-          </div>
-          <div class="song-timer">
-            <span class="current-time">0:00</span>
-            <span class="max-duration">0:00</span>
-          </div>
+            <div class="progress-bar">
+                <audio src="" id="main-audio"></audio>
+            </div>
+            <div class="song-timer">
+                <span class="current-time">
+                    0:00
+                </span>
+                <span class="max-duration">
+                    0:00
+                </span>
+            </div>
         </div>
 
         <div class="controls">
-          <i id="repeat-plist" class="material-icons" title="Playlist looped">repeat</i>
-          <i id="prev" class="material-icons">skip_previous</i>
-          <div class="play-pause">
-            <i class="material-icons play">play_arrow</i>
-          </div>
-          <i id="next" class="material-icons">skip_next</i>
-          <i id="more-music" class="material-icons">queue_music</i>
+            <i id="repeat-plist" class="material-icons" title="Playlist looped">repeat</i>
+            <i id="prev" class="material-icons" >skip_previous</i>
+            <div class="play-pause">
+                <i class="material-icons play" >play_arrow</i>
+            </div>
+            <i id="next" class="material-icons" >skip_next</i>
+            <i id="more-music" class="material-icons" >queue_music</i>
         </div>
 
         <div class="music-list">
-          <div class="header">
-            <div class="row">
-              <i class="list material-icons">queue_music</i>
-              <span>Danh sách bài hát</span>
+            <div class="header">
+                <div class="row">
+                    <i class="list material-icons">queue_music</i>
+                    <span>Danh sách bài hát</span>
+                </div>
+                <i id="close" class="material-icons">close</i>
             </div>
-            <i id="close" class="material-icons">close</i>
-          </div>
-          <ul>
-            <!-- Danh sách nhạc sẽ được thêm bằng JavaScript -->
-          </ul>
+            <ul>
+              
+            </ul>
         </div>
-      </div>
     </div>
+
+    <script src="./js/music-list.js"></script>
+    <script src="./js/script.js"></script>
+ 
+
     
     <!-- Info Tab -->
     <div id="info-tab" class="tab-content">
@@ -844,209 +852,8 @@
     });
     
     // Music list data
-    const musicList = [
-      {
-        name: "Magnetic",
-        artist: "ILLIT",
-        src: "https://example.com/magnetic.mp3", // Placeholder URL
-        img: "https://i.ibb.co/6mK6y0F/illit-magnetic.jpg",
-        duration: "3:10"
-      },
-      {
-        name: "Lucky Girl Syndrome",
-        artist: "ILLIT",
-        src: "https://example.com/lucky-girl.mp3",
-        img: "https://i.ibb.co/3Y4VcWb/yunah.jpg",
-        duration: "2:55"
-      },
-      {
-        name: "My World",
-        artist: "ILLIT",
-        src: "https://example.com/my-world.mp3",
-        img: "https://i.ibb.co/L9W9M2Q/minju.jpg",
-        duration: "3:22"
-      },
-      {
-        name: "Midnight Fiction",
-        artist: "ILLIT",
-        src: "https://example.com/midnight-fiction.mp3",
-        img: "https://i.ibb.co/6XHdX7b/moka.jpg",
-        duration: "3:05"
-      }
-    ];
+ 
     
-    // Player functionality
-    const wrapper = document.querySelector('.wrapper');
-    const playPauseBtn = document.querySelector('.play-pause');
-    const playIcon = document.querySelector('.play');
-    const progressBar = document.querySelector('.progress');
-    const progressArea = document.querySelector('.progress-bar');
-    const currentTimeEl = document.querySelector('.current-time');
-    const maxDurationEl = document.querySelector('.max-duration');
-    const musicListBtn = document.querySelector('#more-music');
-    const musicListContainer = document.querySelector('.music-list');
-    const closeMusicList = document.querySelector('#close');
-    const songName = document.querySelector('.song-details .name');
-    const songArtist = document.querySelector('.song-details .artist');
-    const songImg = document.querySelector('.img-area img');
-    const mainAudio = document.getElementById('main-audio');
-    const ulTag = document.querySelector('.music-list ul');
-    
-    let isPlaying = false;
-    let currentMusicIndex = 0;
-    
-    // Load music list
-    function loadMusicList() {
-      ulTag.innerHTML = '';
-      
-      musicList.forEach((music, index) => {
-        let liTag = `
-          <li data-index="${index}">
-            <div class="row">
-              <div class="details">
-                <span class="name">${music.name}</span>
-                <span class="artist">${music.artist}</span>
-              </div>
-              <span class="audio-duration">${music.duration}</span>
-            </div>
-          </li>
-        `;
-        
-        ulTag.insertAdjacentHTML('beforeend', liTag);
-      });
-      
-      // Set first song as active
-      const allLiTags = ulTag.querySelectorAll('li');
-      allLiTags[currentMusicIndex].classList.add('playing');
-    }
-    
-    // Load music data
-    function loadMusic(index) {
-      const music = musicList[index];
-      songName.textContent = music.name;
-      songArtist.textContent = music.artist;
-      songImg.src = music.img;
-      mainAudio.src = music.src;
-      
-      // Update active song in playlist
-      const allLiTags = ulTag.querySelectorAll('li');
-      allLiTags.forEach(li => li.classList.remove('playing'));
-      allLiTags[index].classList.add('playing');
-    }
-    
-    // Play/Pause functionality
-    playPauseBtn.addEventListener('click', () => {
-      isPlaying = !isPlaying;
-      if (isPlaying) {
-        playIcon.textContent = 'pause';
-        wrapper.classList.add('playing');
-        mainAudio.play();
-      } else {
-        playIcon.textContent = 'play_arrow';
-        wrapper.classList.remove('playing');
-        mainAudio.pause();
-      }
-    });
-    
-    // Update progress bar
-    mainAudio.addEventListener('timeupdate', (e) => {
-      const currentTime = e.target.currentTime;
-      const duration = e.target.duration;
-      
-      let progressWidth = (currentTime / duration) * 100;
-      progressBar.style.width = `${progressWidth}%`;
-      
-      currentTimeEl.textContent = formatTime(currentTime);
-      
-      if (!isNaN(duration)) {
-        maxDurationEl.textContent = formatTime(duration);
-      }
-    });
-    
-    // Format time
-    function formatTime(time) {
-      const min = Math.floor(time / 60);
-      const sec = Math.floor(time % 60);
-      return `${min}:${sec < 10 ? '0' : ''}${sec}`;
-    }
-    
-    // Skip to position in song
-    progressArea.addEventListener('click', (e) => {
-      let progressWidth = progressArea.clientWidth;
-      let clickedOffsetX = e.offsetX;
-      let songDuration = mainAudio.duration;
-      
-      mainAudio.currentTime = (clickedOffsetX / progressWidth) * songDuration;
-    });
-    
-    // Music list toggle
-    musicListBtn.addEventListener('click', () => {
-      musicListContainer.classList.add('show');
-    });
-    
-    closeMusicList.addEventListener('click', () => {
-      musicListContainer.classList.remove('show');
-    });
-    
-    // Song selection
-    ulTag.addEventListener('click', (e) => {
-      const li = e.target.closest('li');
-      if (!li) return;
-      
-      const index = parseInt(li.getAttribute('data-index'));
-      if (index === currentMusicIndex && isPlaying) return;
-      
-      currentMusicIndex = index;
-      loadMusic(currentMusicIndex);
-      
-      if (isPlaying) {
-        mainAudio.play();
-      }
-      
-      musicListContainer.classList.remove('show');
-    });
-    
-    // Skip to next/previous song
-    document.getElementById('next').addEventListener('click', () => {
-      currentMusicIndex = (currentMusicIndex + 1) % musicList.length;
-      loadMusic(currentMusicIndex);
-      
-      if (isPlaying) {
-        mainAudio.play();
-      }
-    });
-    
-    document.getElementById('prev').addEventListener('click', () => {
-      currentMusicIndex = (currentMusicIndex - 1 + musicList.length) % musicList.length;
-      loadMusic(currentMusicIndex);
-      
-      if (isPlaying) {
-        mainAudio.play();
-      }
-    });
-    
-    // Repeat playlist
-    const repeatBtn = document.getElementById('repeat-plist');
-    let isRepeat = false;
-    
-    repeatBtn.addEventListener('click', () => {
-      isRepeat = !isRepeat;
-      repeatBtn.style.color = isRepeat ? '#ff6ec4' : '#d0cde7';
-    });
-    
-    // When song ends
-    mainAudio.addEventListener('ended', () => {
-      if (isRepeat) {
-        mainAudio.currentTime = 0;
-        mainAudio.play();
-      } else {
-        document.getElementById('next').click();
-      }
-    });
-    
-    // Initialize
-    loadMusicList();
-    loadMusic(currentMusicIndex);
   </script>
 </body>
 </html>
