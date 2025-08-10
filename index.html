@@ -16,7 +16,7 @@
       background-attachment: fixed;
       background-size: cover;
       margin: 0;
-      padding: 100px 0 30px; /* Tăng padding trên/dưới cho mọi nền tảng */
+      padding: 40px 0 30px; /* Tăng padding trên/dưới cho mọi nền tảng */
       min-height: 100vh;
       color: #ffffff;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -58,7 +58,8 @@
     /* Tăng khoảng trống giữa các phần */
     .illit-info {
       text-align: center;
-      margin-bottom: 30px; /* Tăng margin dưới */
+      margin-top: 30px; /* Đổi thành margin-top */
+      margin-bottom: 0; /* Bỏ margin dưới */
       padding: 25px;
       border-radius: 15px;
       background: rgba(255, 255, 255, 0.05);
@@ -288,7 +289,8 @@
       
       .illit-info {
         padding: 20px;
-        margin-bottom: 20px;
+        margin-top: 20px;
+        margin-bottom: 0;
       }
       
       .illit-logo {
@@ -361,6 +363,58 @@
 </head>
 <body>
   <div class="wrapper">
+    <!-- Phần music player lên đầu -->
+    <div class="top-bar">
+      <i class="material-icons">expand_more</i>
+      <span>Đang phát bài</span>
+      <i class="material-icons">more_horiz</i>
+    </div>
+
+    <div class="img-area">
+      <img src="" alt="">
+    </div>
+
+    <div class="song-details">
+      <p class="name"></p>
+      <p class="artist"></p>
+    </div>
+
+    <div class="progress-area">
+      <div class="progress-bar">
+        <audio src="" id="main-audio"></audio>
+      </div>
+      <div class="song-timer">
+        <span class="current-time">
+          0:00
+        </span>
+        <span class="max-duration">
+          0:00
+        </span>
+      </div>
+    </div>
+
+    <div class="controls">
+      <i id="repeat-plist" class="material-icons" title="Playlist looped">repeat</i>
+      <i id="prev" class="material-icons">skip_previous</i>
+      <div class="play-pause">
+        <i class="material-icons play">play_arrow</i>
+      </div>
+      <i id="next" class="material-icons">skip_next</i>
+      <i id="more-music" class="material-icons">queue_music</i>
+    </div>
+
+    <div class="music-list">
+      <div class="header">
+        <div class="row">
+          <i class="list material-icons">queue_music</i>
+          <span>Danh sách bài hát</span>
+        </div>
+        <i id="close" class="material-icons">close</i>
+      </div>
+      <ul></ul>
+    </div>
+    
+    <!-- Phần thông tin ILLIT xuống cuối (vẫn trong wrapper) -->
     <div class="illit-info">
       <div class="illit-logo">ILLIT</div>
       
@@ -436,56 +490,6 @@
         <p>• Album đầu tay bán được hơn 500,000 bản trong tuần đầu</p>
         <p>• Nhóm mới có lượt nghe cao nhất trên Spotify 2024</p>
       </div>
-    </div>
-    
-    <div class="top-bar">
-      <i class="material-icons">expand_more</i>
-      <span>Đang phát bài</span>
-      <i class="material-icons">more_horiz</i>
-    </div>
-
-    <div class="img-area">
-      <img src="" alt="">
-    </div>
-
-    <div class="song-details">
-      <p class="name"></p>
-      <p class="artist"></p>
-    </div>
-
-    <div class="progress-area">
-      <div class="progress-bar">
-        <audio src="" id="main-audio"></audio>
-      </div>
-      <div class="song-timer">
-        <span class="current-time">
-          0:00
-        </span>
-        <span class="max-duration">
-          0:00
-        </span>
-      </div>
-    </div>
-
-    <div class="controls">
-      <i id="repeat-plist" class="material-icons" title="Playlist looped">repeat</i>
-      <i id="prev" class="material-icons">skip_previous</i>
-      <div class="play-pause">
-        <i class="material-icons play">play_arrow</i>
-      </div>
-      <i id="next" class="material-icons">skip_next</i>
-      <i id="more-music" class="material-icons">queue_music</i>
-    </div>
-
-    <div class="music-list">
-      <div class="header">
-        <div class="row">
-          <i class="list material-icons">queue_music</i>
-          <span>Danh sách bài hát</span>
-        </div>
-        <i id="close" class="material-icons">close</i>
-      </div>
-      <ul></ul>
     </div>
   </div>
 
