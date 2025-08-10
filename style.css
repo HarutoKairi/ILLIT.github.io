@@ -234,6 +234,19 @@ Này là cái nút mà bấm vô sẽ hiện list nhạc í  */
   overflow: auto;
 }
 
+
+
+  .separator {
+    margin: 0 5px;
+    color: #a29ebd;
+  }
+  
+
+
+
+
+
+
 /* Do mình làm quen rùi nên nãy giờ mình CSS ước chừng thui chứ khum chính xác đâu nhe :D lát có j cần căn chỉnh thì lát mình quay lại đây he :3 */
 .music-list ul::-webkit-scrollbar {
   width: 0px;
