@@ -217,6 +217,7 @@ Này là cái nút mà bấm vô sẽ hiện list nhạc í  */
   align-items: center;
   font-size: 19px;
   color: var(--lightback);
+    flex-wrap: wrap;
 }
 .header .row i {
   cursor: default;
@@ -240,9 +241,6 @@ Này là cái nút mà bấm vô sẽ hiện list nhạc í  */
     margin: 0 5px;
     color: #a29ebd;
   }
-  .artist {
-  color: #a29ebd;
-}
 
 
 
