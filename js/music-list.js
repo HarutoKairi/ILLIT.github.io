@@ -19,3 +19,20 @@ let allMusic = [
   },
 
 ];
+
+
+
+const musicList = document.querySelector(".music-list ul");
+
+// Tạo danh sách bài hát
+allMusic.forEach((music, index) => {
+  let liTag = `<li data-index="${index}">
+                <div class="row">
+                  <span>${music.name}</span>
+                  <span class="separator">-</span>
+                  <span class="artist">${music.artist}</span>
+                  <span class="audio-duration">3:40</span>
+                </div>
+              </li>`;
+  musicList.insertAdjacentHTML("beforeend", liTag);
+});
