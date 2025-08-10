@@ -6,106 +6,170 @@
   <title>ILLIT</title>
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <style>
+    /* Hiệu ứng hạt nền */
+    #particles-js {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      z-index: -1;
+    }
+    
+    /* Footer với thông tin thành viên */
+    .member-info {
+      position: absolute;
+      bottom: 20px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.7);
+      font-size: 12px;
+      padding: 10px;
+      z-index: 10;
+    }
+    
+    .members {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    
+    .member {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 6px 12px;
+      border-radius: 20px;
+      backdrop-filter: blur(5px);
+    }
+    
+    .designer {
+      margin-top: 8px;
+      font-style: italic;
+    }
+  </style>
 </head>
 <body>
-    <div class="wrapper">
-        <!-- Nội dung hiện tại của trình phát nhạc -->
+  <!-- Background với hiệu ứng hạt -->
+  <div id="particles-js"></div>
+  
+  <div class="wrapper">
+    <div class="top-bar">
+      <i class="material-icons">expand_more</i>
+      <span>Đang phát bài</span>
+      <i class="material-icons">more_horiz</i>
     </div>
 
-    <!-- Phần thông tin ILLIT được thêm vào -->
-    <div class="illit-info">
-        <h1>ILLIT</h1>
-        <p>ILLIT (아일릿) là nhóm nhạc nữ Hàn Quốc được thành lập bởi BELIFT LAB (liên doanh giữa HYBE và CJ ENM). Nhóm chính thức ra mắt vào ngày 25 tháng 3 năm 2024 với mini-album đầu tay "SUPER REAL ME".</p>
-        <p>Tên nhóm "ILLIT" là viết tắt của "I Will It", thể hiện thông điệp "Chúng tôi sẽ làm được" và tinh thần quyết tâm theo đuổi ước mơ. Nhóm nổi tiếng với phong cách âm nhạc Y2K retro kết hợp với hình ảnh độc đáo và đầy cá tính.</p>
-        
-        <div class="basic-info">
-            <div class="info-item">
-                <span class="number">5</span>
-                <span class="label">Thành viên</span>
-            </div>
-            <div class="info-item">
-                <span class="date">25.03.2024</span>
-                <span class="label">Ngày ra mắt</span>
-            </div>
-            <div class="info-item">
-                <span class="company">BELIFT LAB</span>
-                <span class="label">Công ty quản lý</span>
-            </div>
-            <div class="info-item">
-                <span class="hashtag">#Magnetic</span>
-                <span class="label">Bài hit đầu tiên</span>
-            </div>
-        </div>
-        
-        <div class="members-section">
-            <h2>Thành viên</h2>
-            <div class="members">
-                <div class="member">
-                    <span class="initial">Y</span>
-                    <div class="member-info">
-                        <span class="name">Yunah</span>
-                        <span class="position">Leader</span>
-                    </div>
-                </div>
-                <div class="member">
-                    <span class="initial">M</span>
-                    <div class="member-info">
-                        <span class="name">Minju</span>
-                        <span class="position">Main Vocal</span>
-                    </div>
-                </div>
-                <div class="member">
-                    <span class="initial">M</span>
-                    <div class="member-info">
-                        <span class="name">Moka</span>
-                        <span class="position">Rapper</span>
-                    </div>
-                </div>
-                <div class="member">
-                    <span class="initial">W</span>
-                    <div class="member-info">
-                        <span class="name">Wonhee</span>
-                        <span class="position">Vocal</span>
-                    </div>
-                </div>
-                <div class="member">
-                    <span class="initial">I</span>
-                    <div class="member-info">
-                        <span class="name">Iroha</span>
-                        <span class="position">Main Dancer</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="discography">
-            <h2>Danh mục phát hành</h2>
-            <div class="album">
-                <span class="album-initial">S</span>
-                <div class="album-info">
-                    <span class="album-title">SUPER REAL ME</span>
-                    <span class="album-date">25 tháng 3, 2024</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="achievements">
-            <h2>Thành tựu</h2>
-            <ul>
-                <li>"Magnetic" đạt #1 trên Billboard Global Excl. US</li>
-                <li>Video "Magnetic" đạt 100 triệu view sau 1 tháng</li>
-                <li>Album đầu tay bán được hơn 500,000 bản trong tuần đầu</li>
-                <li>Nhóm mới có lượt nghe cao nhất trên Spotify 2024</li>
-            </ul>
-        </div>
-        
-        <div class="copyright">
-            <p>© 2024 ILLIT Music Player | BELIFT LAB</p>
-            <p>Thiết kế bởi Haruto Kairi (chieunguyen2002)</p>
-        </div>
+    <div class="img-area">
+      <img src="" alt="">
     </div>
 
-    <script src="./js/music-list.js"></script>
-    <script src="./js/script.js"></script>
+    <div class="song-details">
+      <p class="name"></p>
+      <p class="artist"></p>
+    </div>
+
+    <div class="progress-area">
+      <div class="progress-bar">
+        <audio src="" id="main-audio"></audio>
+      </div>
+      <div class="song-timer">
+        <span class="current-time">
+          0:00
+        </span>
+        <span class="max-duration">
+          0:00
+        </span>
+      </div>
+    </div>
+
+    <div class="controls">
+      <i id="repeat-plist" class="material-icons" title="Playlist looped">repeat</i>
+      <i id="prev" class="material-icons" >skip_previous</i>
+      <div class="play-pause">
+        <i class="material-icons play" >play_arrow</i>
+      </div>
+      <i id="next" class="material-icons" >skip_next</i>
+      <i id="more-music" class="material-icons" >queue_music</i>
+    </div>
+
+    <div class="music-list">
+      <div class="header">
+        <div class="row">
+          <i class="list material-icons">queue_music</i>
+          <span>Danh sách bài hát</span>
+        </div>
+        <i id="close" class="material-icons">close</i>
+      </div>
+      <ul>
+        <!-- Danh sách nhạc sẽ được thêm ở đây -->
+      </ul>
+    </div>
+    
+    <!-- Thông tin thành viên và designer -->
+    <div class="member-info">
+      <div class="members">
+        <span class="member">YUJIN</span>
+        <span class="member">YOUNGSEO</span>
+        <span class="member">MINJU</span>
+        <span class="member">MOKA</span>
+        <span class="member">WONHEE</span>
+        <span class="member">IROHA</span>
+      </div>
+      <div class="designer">
+        Designed by Haruto Kairi (chieunguyen2002)
+      </div>
+    </div>
+  </div>
+
+  <!-- Thêm thư viện particles.js -->
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    // Khởi tạo hiệu ứng hạt
+    document.addEventListener('DOMContentLoaded', function() {
+      particlesJS('particles-js', {
+        particles: {
+          number: { value: 80, density: { enable: true, value_area: 800 } },
+          color: { value: "#ffffff" },
+          shape: { type: "circle" },
+          opacity: { value: 0.5, random: true },
+          size: { value: 3, random: true },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: "#ffffff",
+            opacity: 0.4,
+            width: 1
+          },
+          move: {
+            enable: true,
+            speed: 2,
+            direction: "none",
+            random: true,
+            straight: false,
+            out_mode: "out",
+            bounce: false
+          }
+        },
+        interactivity: {
+          detect_on: "canvas",
+          events: {
+            onhover: { enable: true, mode: "grab" },
+            onclick: { enable: true, mode: "push" },
+            resize: true
+          },
+          modes: {
+            grab: { distance: 140, line_linked: { opacity: 1 } },
+            push: { particles_nb: 4 }
+          }
+        },
+        retina_detect: true
+      });
+    });
+  </script>
+
+  <script src="./js/music-list.js"></script>
+  <script src="./js/script.js"></script>
 </body>
 </html>
