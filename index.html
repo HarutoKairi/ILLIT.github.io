@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ILLIT - Music Player</title>
+  <title>ILLIT - Magnetic Music Player</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -216,7 +216,6 @@
       border-radius: 10px;
       margin-bottom: 10px;
       cursor: pointer;
-      position: relative;
     }
     
     .progress-bar .progress {
@@ -605,63 +604,55 @@
     <div id="player-tab" class="tab-content active">
       <div class="wrapper">
         <div class="top-bar">
-            <i class="material-icons">expand_more</i>
-            <span>Đang phát bài</span>
-            <i class="material-icons">more_horiz</i>
+          <i class="material-icons">expand_more</i>
+          <span>Đang phát bài</span>
+          <i class="material-icons">more_horiz</i>
         </div>
 
         <div class="img-area">
-            <img src="" alt="">
-          
+          <img src="" alt="">
         </div>
 
         <div class="song-details">
-            <p class="name"></p>
-            <p class="artist"></p>
+          <p class="name"></p>
+          <p class="artist"></p>
         </div>
 
         <div class="progress-area">
-            <div class="progress-bar">
-                <audio src="" id="main-audio"></audio>
-            </div>
-            <div class="song-timer">
-                <span class="current-time">
-                    0:00
-                </span>
-                <span class="max-duration">
-                    0:00
-                </span>
-            </div>
+          <div class="progress-bar">
+            <audio src="" id="main-audio"></audio>
+            <div class="progress"></div>
+          </div>
+          <div class="song-timer">
+            <span class="current-time">0:00</span>
+            <span class="max-duration">0:00</span>
+          </div>
         </div>
 
         <div class="controls">
-            <i id="repeat-plist" class="material-icons" title="Playlist looped">repeat</i>
-            <i id="prev" class="material-icons" >skip_previous</i>
-            <div class="play-pause">
-                <i class="material-icons play" >play_arrow</i>
-            </div>
-            <i id="next" class="material-icons" >skip_next</i>
-            <i id="more-music" class="material-icons" >queue_music</i>
+          <i id="repeat-plist" class="material-icons" title="Playlist looped">repeat</i>
+          <i id="prev" class="material-icons" >skip_previous</i>
+          <div class="play-pause">
+            <i class="material-icons play" >play_arrow</i>
+          </div>
+          <i id="next" class="material-icons" >skip_next</i>
+          <i id="more-music" class="material-icons" >queue_music</i>
         </div>
 
         <div class="music-list">
-            <div class="header">
-                <div class="row">
-                    <i class="list material-icons">queue_music</i>
-                    <span>Danh sách bài hát</span>
-                </div>
-                <i id="close" class="material-icons">close</i>
+          <div class="header">
+            <div class="row">
+              <i class="list material-icons">queue_music</i>
+              <span>Danh sách bài hát</span>
             </div>
-            <ul>
-              
-            </ul>
+            <i id="close" class="material-icons">close</i>
+          </div>
+          <ul>
+            <!-- Danh sách bài hát sẽ được tải động -->
+          </ul>
         </div>
+      </div>
     </div>
-
-    <script src="./js/music-list.js"></script>
-    <script src="./js/script.js"></script>
- 
-
     
     <!-- Info Tab -->
     <div id="info-tab" class="tab-content">
@@ -851,9 +842,191 @@
       });
     });
     
-    // Music list data
- 
+    // Player functionality
+    const wrapper = document.querySelector('.wrapper');
+    const playPauseBtn = document.querySelector('.play-pause');
+    const playIcon = document.querySelector('.play');
+    const progressBar = document.querySelector('.progress');
+    const currentTimeEl = document.querySelector('.current-time');
+    const maxDurationEl = document.querySelector('.max-duration');
+    const musicListBtn = document.querySelector('#more-music');
+    const musicList = document.querySelector('.music-list');
+    const closeMusicList = document.querySelector('#close');
+    const allSongs = document.querySelectorAll('ul li');
     
+    // Danh sách bài hát
+    const songs = [
+      {
+        name: "Magnetic",
+        artist: "ILLIT",
+        img: "https://i.ibb.co/6mK6y0F/illit-magnetic.jpg",
+        src: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/5c/5f/65/5c5f65c7-7f3b-9c14-5c93-4f6d5f3f4b67/mzaf_3450162364360355341.plus.aac.p.m4a",
+        duration: "3:10"
+      },
+      {
+        name: "Lucky Girl Syndrome",
+        artist: "ILLIT",
+        img: "https://i.ibb.co/2cHrN1g/illit-lucky.jpg",
+        src: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/5c/5f/65/5c5f65c7-7f3b-9c14-5c93-4f6d5f3f4b67/mzaf_3450162364360355341.plus.aac.p.m4a",
+        duration: "2:55"
+      },
+      {
+        name: "My World",
+        artist: "ILLIT",
+        img: "https://i.ibb.co/3Y4VcWb/yunah.jpg",
+        src: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/5c/5f/65/5c5f65c7-7f3b-9c14-5c93-4f6d5f3f4b67/mzaf_3450162364360355341.plus.aac.p.m4a",
+        duration: "3:22"
+      },
+      {
+        name: "Midnight Fiction",
+        artist: "ILLIT",
+        img: "https://i.ibb.co/0y2H9tC/iroha.jpg",
+        src: "https://audio-ssl.itunes.apple.com/itunes-assets/AudioPreview116/v4/5c/5f/65/5c5f65c7-7f3b-9c14-5c93-4f6d5f3f4b67/mzaf_3450162364360355341.plus.aac.p.m4a",
+        duration: "3:05"
+      }
+    ];
+
+    // Tạo danh sách bài hát
+    const musicListUl = document.querySelector('.music-list ul');
+    songs.forEach((song, index) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <div class="row">
+          <div class="details">
+            <span class="name">${song.name}</span>
+            <span class="artist">${song.artist}</span>
+          </div>
+          <span class="audio-duration">${song.duration}</span>
+        </div>
+      `;
+      if (index === 0) {
+        li.classList.add('playing');
+      }
+      musicListUl.appendChild(li);
+    });
+
+    // Cập nhật bài hát hiện tại
+    let currentSong = 0;
+    const mainAudio = document.getElementById('main-audio');
+    const songImg = document.querySelector('.img-area img');
+    const songName = document.querySelector('.song-details .name');
+    const songArtist = document.querySelector('.song-details .artist');
+    const allListItems = document.querySelectorAll('.music-list ul li');
+
+    function loadSong(index) {
+      const song = songs[index];
+      songImg.src = song.img;
+      songImg.alt = song.name;
+      songName.textContent = song.name;
+      songArtist.textContent = song.artist;
+      mainAudio.src = song.src;
+      
+      // Cập nhật trạng thái bài hát đang phát
+      allListItems.forEach((item, i) => {
+        if (i === index) {
+          item.classList.add('playing');
+        } else {
+          item.classList.remove('playing');
+        }
+      });
+    }
+
+    // Khởi tạo bài hát đầu tiên
+    loadSong(currentSong);
+
+    let isPlaying = false;
+    
+    // Play/Pause functionality
+    playPauseBtn.addEventListener('click', () => {
+      isPlaying = !isPlaying;
+      if (isPlaying) {
+        playIcon.textContent = 'pause';
+        wrapper.classList.add('playing');
+        mainAudio.play();
+      } else {
+        playIcon.textContent = 'play_arrow';
+        wrapper.classList.remove('playing');
+        mainAudio.pause();
+      }
+    });
+    
+    // Music list toggle
+    musicListBtn.addEventListener('click', () => {
+      musicList.classList.add('show');
+    });
+    
+    closeMusicList.addEventListener('click', () => {
+      musicList.classList.remove('show');
+    });
+    
+    // Song selection
+    allListItems.forEach((song, index) => {
+      song.addEventListener('click', () => {
+        currentSong = index;
+        loadSong(currentSong);
+        
+        // Start playing
+        isPlaying = true;
+        playIcon.textContent = 'pause';
+        wrapper.classList.add('playing');
+        mainAudio.play();
+        
+        // Close music list
+        musicList.classList.remove('show');
+      });
+    });
+    
+    // Cập nhật thanh tiến trình
+    mainAudio.addEventListener('timeupdate', (e) => {
+      const currentTime = e.target.currentTime;
+      const duration = e.target.duration;
+      const progressPercent = (currentTime / duration) * 100;
+      progressBar.style.width = `${progressPercent}%`;
+      
+      // Format time
+      currentTimeEl.textContent = formatTime(currentTime);
+      maxDurationEl.textContent = formatTime(duration);
+    });
+    
+    function formatTime(seconds) {
+      const min = Math.floor(seconds / 60);
+      const sec = Math.floor(seconds % 60);
+      return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+    }
+    
+    // Nhảy đến vị trí khi click vào thanh tiến trình
+    const progressBarArea = document.querySelector('.progress-bar');
+    progressBarArea.addEventListener('click', (e) => {
+      const progressWidth = progressBarArea.clientWidth;
+      const clickedOffsetX = e.offsetX;
+      const songDuration = mainAudio.duration;
+      
+      mainAudio.currentTime = (clickedOffsetX / progressWidth) * songDuration;
+    });
+    
+    // Skip to next/previous song
+    document.getElementById('next').addEventListener('click', () => {
+      currentSong = (currentSong + 1) % songs.length;
+      loadSong(currentSong);
+      if (isPlaying) {
+        mainAudio.play();
+      }
+    });
+    
+    document.getElementById('prev').addEventListener('click', () => {
+      currentSong = (currentSong - 1 + songs.length) % songs.length;
+      loadSong(currentSong);
+      if (isPlaying) {
+        mainAudio.play();
+      }
+    });
+    
+    // Tự động chuyển bài tiếp theo
+    mainAudio.addEventListener('ended', () => {
+      currentSong = (currentSong + 1) % songs.length;
+      loadSong(currentSong);
+      mainAudio.play();
+    });
   </script>
 </body>
 </html>
