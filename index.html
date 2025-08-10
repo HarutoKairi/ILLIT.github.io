@@ -1,26 +1,43 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ILLIT Music Player</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   <style>
+    :root {
+      --primary-color: #fbc2eb;
+      --secondary-color: #a6c1ee;
+      --background-gradient: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      --card-bg: rgba(25, 25, 45, 0.7);
+      --highlight-bg: rgba(251, 194, 235, 0.1);
+      --text-color: #ffffff;
+      --text-secondary: #e0e0ff;
+    }
+
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
+
+    html, body {
+      height: 100%;
+    }
     
     body {
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      background: var(--background-gradient);
       background-attachment: fixed;
       background-size: cover;
+      margin: 0;
+      padding: 0;
       min-height: 100vh;
-      color: #ffffff;
+      color: var(--text-color);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       position: relative;
-      padding: 30px 20px;
+      display: flex;
+      flex-direction: column;
     }
     
     body::before {
@@ -36,49 +53,234 @@
       pointer-events: none;
       z-index: -1;
     }
-    
-    .container {
+
+    /* Container chính */
+    .main-container {
       display: flex;
       flex-wrap: wrap;
-      gap: 30px;
       max-width: 1200px;
-      margin: 0 auto;
+      width: 90%;
+      margin: 20px auto;
+      gap: 30px;
+    }
+    
+    /* Phần player bên trái */
+    .player-container {
+      flex: 1;
+      min-width: 350px;
       position: relative;
       z-index: 1;
-    }
-    
-    .player-section {
-      flex: 1;
-      min-width: 350px;
-      max-width: 500px;
-    }
-    
-    .info-section {
-      flex: 1;
-      min-width: 350px;
-      max-width: 600px;
-    }
-    
-    .wrapper {
-      width: 100%;
       padding: 25px;
-      background: rgba(25, 25, 45, 0.7);
+      background: var(--card-bg);
       backdrop-filter: blur(10px);
       border-radius: 20px;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
       border: 1px solid rgba(255, 255, 255, 0.1);
-      margin-bottom: 20px;
+      height: fit-content;
     }
     
-    /* Giữ nguyên toàn bộ CSS hiện có */
-    .illit-info {
-      text-align: center;
-      margin-bottom: 25px;
+    /* Phần thông tin bên phải */
+    .info-container {
+      flex: 1;
+      min-width: 350px;
+      position: relative;
+      z-index: 1;
       padding: 25px;
+      background: var(--card-bg);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Phần player */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px 0;
+      color: var(--primary-color);
+    }
+    
+    .img-area {
+      width: 250px;
+      height: 250px;
+      margin: 20px auto;
       border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+      background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .img-area img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    
+    .song-details {
+      text-align: center;
+      margin: 20px 0;
+    }
+    
+    .song-details .name {
+      font-size: 1.8rem;
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: var(--primary-color);
+    }
+    
+    .song-details .artist {
+      font-size: 1.2rem;
+      color: var(--secondary-color);
+    }
+    
+    .progress-area {
+      margin: 25px 0;
+    }
+    
+    .progress-bar {
+      height: 6px;
+      width: 100%;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      cursor: pointer;
+      position: relative;
+    }
+    
+    .progress-bar .progress {
+      height: 100%;
+      width: 0%;
+      background: var(--primary-color);
+      border-radius: 10px;
+      position: relative;
+      transition: width 0.1s linear;
+    }
+    
+    .song-timer {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+      font-size: 0.85rem;
+      color: var(--secondary-color);
+    }
+    
+    .controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 25px 0;
+      gap: 20px;
+    }
+    
+    .controls i {
+      cursor: pointer;
+      color: var(--text-secondary);
+      transition: all 0.2s ease;
+    }
+    
+    .controls i:hover {
+      color: var(--primary-color);
+      transform: scale(1.1);
+    }
+    
+    .play-pause {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: var(--primary-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 0 20px rgba(251, 194, 235, 0.5);
+    }
+    
+    .play-pause i {
+      color: #16213e;
+      font-size: 2.5rem;
+    }
+    
+    .music-list {
+      padding: 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      margin-top: 20px;
+      display: none;
+    }
+    
+    .music-list.show {
+      display: block;
+    }
+    
+    .music-list .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      margin-bottom: 15px;
+    }
+    
+    .header .row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--primary-color);
+    }
+    
+    .header .row span {
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+    
+    .header #close {
+      cursor: pointer;
+      color: var(--text-secondary);
+    }
+    
+    .music-list ul {
+      list-style: none;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+    
+    .music-list ul li {
+      display: flex;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .music-list ul li:hover {
       background: rgba(255, 255, 255, 0.05);
     }
     
+    .music-list ul li.playing {
+      background: rgba(251, 194, 235, 0.1);
+      color: var(--primary-color);
+    }
+    
+    .music-list ul li .row span {
+      display: block;
+    }
+    
+    .music-list ul li .row .name {
+      font-size: 1rem;
+      margin-bottom: 3px;
+    }
+    
+    .music-list ul li .row .artist {
+      font-size: 0.8rem;
+      color: var(--secondary-color);
+    }
+    
+    /* Phần thông tin nhóm */
     .illit-logo {
       font-size: 3.5rem;
       font-weight: bold;
@@ -87,15 +289,15 @@
       background-clip: text;
       color: transparent;
       margin-bottom: 20px;
+      text-align: center;
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
     
     .illit-description {
       font-size: 1rem;
-      color: #e0e0ff;
+      color: var(--text-secondary);
       line-height: 1.7;
       margin-bottom: 20px;
-      text-align: left;
     }
     
     .illit-highlights {
@@ -107,7 +309,7 @@
     }
     
     .highlight-card {
-      background: rgba(251, 194, 235, 0.1);
+      background: var(--highlight-bg);
       border-radius: 12px;
       padding: 15px;
       min-width: 140px;
@@ -118,13 +320,13 @@
     .highlight-value {
       font-weight: bold;
       font-size: 1.3rem;
-      color: #fbc2eb;
+      color: var(--primary-color);
       margin-bottom: 8px;
     }
     
     .highlight-label {
       font-size: 0.9rem;
-      color: #a6c1ee;
+      color: var(--secondary-color);
     }
     
     .members {
@@ -164,40 +366,15 @@
     
     .member-position {
       font-size: 0.75rem;
-      color: #a6c1ee;
-    }
-    
-    .credit-footer {
-      text-align: center;
-      padding: 25px 15px;
-      color: #aaa;
-      font-size: 0.95rem;
-      width: 100%;
-      flex-shrink: 0;
-      background: rgba(0, 0, 0, 0.3);
-      backdrop-filter: blur(5px);
-      border-radius: 15px;
-      max-width: 1200px;
-      margin: 20px auto 0;
-    }
-    
-    .designer-credit {
-      margin-top: 15px;
-      padding: 10px 20px;
-      background: rgba(255, 119, 0, 0.1);
-      border-radius: 12px;
-      display: inline-block;
-      color: #ff7700;
-      font-size: 1rem;
+      color: var(--secondary-color);
     }
     
     .section-title {
       font-size: 1.3rem;
       font-weight: bold;
-      color: #fbc2eb;
+      color: var(--primary-color);
       margin: 20px 0 15px;
-      text-align: left;
-      border-left: 4px solid #fbc2eb;
+      border-left: 4px solid var(--primary-color);
       padding-left: 15px;
     }
     
@@ -241,399 +418,203 @@
     
     .album-date {
       font-size: 0.85rem;
-      color: #a6c1ee;
+      color: var(--secondary-color);
     }
 
-    /* Phần player */
-    .top-bar {
-      padding: 15px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .top-bar span {
-      font-weight: 500;
-    }
-    
-    .img-area {
-      margin: 20px auto;
-      width: 250px;
-      height: 250px;
-      border-radius: 15px;
-      overflow: hidden;
-      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-    }
-    
-    .img-area img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      background: linear-gradient(45deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
-    }
-    
-    .song-details {
-      margin: 20px 0;
+    .credit-footer {
       text-align: center;
-    }
-    
-    .song-details .name {
-      font-size: 1.5rem;
-      font-weight: 600;
-      margin-bottom: 5px;
-    }
-    
-    .song-details .artist {
-      font-size: 1.1rem;
-      color: #fbc2eb;
-    }
-    
-    .progress-area {
-      margin: 25px 0;
-    }
-    
-    .progress-bar {
-      height: 6px;
+      padding: 25px 15px;
+      color: #aaa;
+      font-size: 0.95rem;
       width: 100%;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 50px;
-      cursor: pointer;
+      flex-shrink: 0;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(5px);
+      margin-top: auto;
     }
     
-    .progress-bar .progress {
-      height: 100%;
-      width: 0%;
-      position: relative;
-      border-radius: inherit;
-      background: linear-gradient(90deg, #ff9a9e, #fad0c4, #fbc2eb, #a6c1ee);
-    }
-    
-    .progress::before {
-      content: "";
-      position: absolute;
-      height: 12px;
-      width: 12px;
-      background: #fff;
-      border-radius: 50%;
-      top: 50%;
-      right: -5px;
-      transform: translateY(-50%);
-      box-shadow: 0 0 8px rgba(255, 255, 255, 0.5);
-    }
-    
-    .song-timer {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 8px;
-      font-size: 0.9rem;
-      color: #a6c1ee;
-    }
-    
-    .controls {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 25px;
-      margin: 25px 0;
-    }
-    
-    .controls i.material-icons {
-      font-size: 2rem;
-      color: #fff;
-      cursor: pointer;
-      transition: all 0.2s ease;
-    }
-    
-    .controls i.material-icons:hover {
-      color: #fbc2eb;
-      transform: scale(1.1);
-    }
-    
-    .play-pause {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: linear-gradient(45deg, #ff9a9e, #fbc2eb);
-      box-shadow: 0 0 15px rgba(251, 194, 235, 0.5);
-    }
-    
-    .play-pause i.material-icons {
-      font-size: 2.5rem;
-      color: #fff;
-    }
-    
-    .music-list {
-      margin-top: 25px;
-      padding: 20px;
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 15px;
-    }
-    
-    .header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 15px;
-    }
-    
-    .header .row {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    
-    .header i.material-icons {
-      cursor: pointer;
-    }
-    
-    .music-list ul {
-      list-style: none;
-    }
-    
-    .music-list ul li {
-      display: flex;
-      align-items: center;
-      padding: 10px;
-      border-radius: 8px;
-      cursor: pointer;
-      margin-bottom: 10px;
-      transition: background 0.3s ease;
-    }
-    
-    .music-list ul li:hover {
-      background: rgba(255, 255, 255, 0.1);
-    }
-    
-    .music-list ul li.playing {
-      background: rgba(251, 194, 235, 0.2);
-    }
-    
-    .music-list ul li .row {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      width: 100%;
-    }
-    
-    .music-list ul li .row img {
-      width: 45px;
-      height: 45px;
-      border-radius: 8px;
-      background: linear-gradient(45deg, #ff9a9e, #fad0c4);
-    }
-    
-    .music-list ul li .row .details {
-      flex: 1;
-    }
-    
-    .music-list ul li .row .details .name {
-      font-weight: 500;
-      margin-bottom: 3px;
-    }
-    
-    .music-list ul li .row .details .artist {
-      font-size: 0.9rem;
-      color: #a6c1ee;
-    }
-    
-    .music-list ul li .row .duration {
-      font-size: 0.9rem;
-      color: #a6c1ee;
+    .designer-credit {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background: rgba(255, 119, 0, 0.1);
+      border-radius: 12px;
+      display: inline-block;
+      color: #ff7700;
+      font-size: 1rem;
     }
     
     /* Responsive */
     @media (max-width: 768px) {
-      .container {
+      .main-container {
         flex-direction: column;
       }
       
-      .player-section, .info-section {
-        max-width: 100%;
+      .player-container, .info-container {
+        min-width: 100%;
       }
       
-      .img-area {
-        width: 200px;
-        height: 200px;
+      .illit-logo {
+        font-size: 2.8rem;
       }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <!-- Player section (bên trái) -->
-    <div class="player-section">
-      <div class="wrapper">
-        <div class="top-bar">
-          <i class="material-icons">expand_more</i>
-          <span>Đang phát bài</span>
-          <i class="material-icons">more_horiz</i>
-        </div>
+  <div class="main-container">
+    <!-- Phần player bên trái -->
+    <div class="player-container">
+      <div class="top-bar">
+        <i class="material-icons">expand_more</i>
+        <span>Đang phát bài</span>
+        <i class="material-icons">more_horiz</i>
+      </div>
 
-        <div class="img-area">
-          <img src="https://i.ibb.co/ZcB1VkZ/illit-magnetic.jpg" alt="ILLIT Magnetic">
-        </div>
+      <div class="img-area">
+        <img src="" alt="Album cover">
+      </div>
 
-        <div class="song-details">
-          <p class="name">Magnetic</p>
-          <p class="artist">ILLIT</p>
-        </div>
+      <div class="song-details">
+        <p class="name">Magnetic</p>
+        <p class="artist">ILLIT</p>
+      </div>
 
-        <div class="progress-area">
-          <div class="progress-bar">
-            <div class="progress"></div>
-          </div>
-          <div class="song-timer">
-            <span class="current-time">0:00</span>
-            <span class="max-duration">3:20</span>
-          </div>
+      <div class="progress-area">
+        <div class="progress-bar">
+          <div class="progress"></div>
+          <audio src="" id="main-audio"></audio>
         </div>
-
-        <div class="controls">
-          <i id="repeat-plist" class="material-icons" title="Playlist looped">repeat</i>
-          <i id="prev" class="material-icons">skip_previous</i>
-          <div class="play-pause">
-            <i class="material-icons play">play_arrow</i>
-          </div>
-          <i id="next" class="material-icons">skip_next</i>
-          <i id="more-music" class="material-icons">queue_music</i>
-        </div>
-
-        <div class="music-list">
-          <div class="header">
-            <div class="row">
-              <i class="list material-icons">queue_music</i>
-              <span>Danh sách bài hát ILLIT</span>
-            </div>
-            <i id="close" class="material-icons">close</i>
-          </div>
-          <ul>
-            <li class="playing">
-              <div class="row">
-                <img src="https://i.ibb.co/ZcB1VkZ/illit-magnetic.jpg" alt="Magnetic">
-                <div class="details">
-                  <span class="name">Magnetic</span>
-                  <span class="artist">ILLIT</span>
-                </div>
-                <span class="duration">3:20</span>
-              </div>
-            </li>
-            <li>
-              <div class="row">
-                <img src="https://i.ibb.co/3r7bR9S/illit-lucky.jpg" alt="Lucky Girl Syndrome">
-                <div class="details">
-                  <span class="name">Lucky Girl Syndrome</span>
-                  <span class="artist">ILLIT</span>
-                </div>
-                <span class="duration">3:12</span>
-              </div>
-            </li>
-            <li>
-              <div class="row">
-                <img src="https://i.ibb.co/0QqV8g2/illit-midnight.jpg" alt="Midnight Fiction">
-                <div class="details">
-                  <span class="name">Midnight Fiction</span>
-                  <span class="artist">ILLIT</span>
-                </div>
-                <span class="duration">2:58</span>
-              </div>
-            </li>
-            <li>
-              <div class="row">
-                <img src="https://i.ibb.co/1nGf8d0/illit-myworld.jpg" alt="My World">
-                <div class="details">
-                  <span class="name">My World</span>
-                  <span class="artist">ILLIT</span>
-                </div>
-                <span class="duration">3:05</span>
-              </div>
-            </li>
-          </ul>
+        <div class="song-timer">
+          <span class="current-time">0:00</span>
+          <span class="max-duration">3:00</span>
         </div>
       </div>
+
+      <div class="controls">
+        <i id="repeat-plist" class="material-icons" title="Playlist looped">repeat</i>
+        <i id="prev" class="material-icons">skip_previous</i>
+        <div class="play-pause">
+          <i class="material-icons play">play_arrow</i>
+        </div>
+        <i id="next" class="material-icons">skip_next</i>
+        <i id="more-music" class="material-icons">queue_music</i>
+      </div>
+
+      <div class="music-list">
+        <div class="header">
+          <div class="row">
+            <i class="list material-icons">queue_music</i>
+            <span>Danh sách bài hát</span>
+          </div>
+          <i id="close" class="material-icons">close</i>
+        </div>
+        <ul>
+          <li class="playing">
+            <div class="row">
+              <span class="name">Magnetic</span>
+              <span class="artist">ILLIT</span>
+            </div>
+            <audio src="" data-name="Magnetic" data-artist="ILLIT"></audio>
+          </li>
+          <li>
+            <div class="row">
+              <span class="name">Lucky Girl Syndrome</span>
+              <span class="artist">ILLIT</span>
+            </div>
+            <audio src="" data-name="Lucky Girl Syndrome" data-artist="ILLIT"></audio>
+          </li>
+          <li>
+            <div class="row">
+              <span class="name">My World</span>
+              <span class="artist">ILLIT</span>
+            </div>
+            <audio src="" data-name="My World" data-artist="ILLIT"></audio>
+          </li>
+          <li>
+            <div class="row">
+              <span class="name">Midnight Fiction</span>
+              <span class="artist">ILLIT</span>
+            </div>
+            <audio src="" data-name="Midnight Fiction" data-artist="ILLIT"></audio>
+          </li>
+        </ul>
+      </div>
     </div>
-    
-    <!-- Info section (bên phải) -->
-    <div class="info-section">
-      <div class="wrapper">
-        <div class="illit-info">
-          <div class="illit-logo">ILLIT</div>
-          
-          <div class="illit-description">
-            <p>ILLIT (아일릿) là nhóm nhạc nữ Hàn Quốc được thành lập bởi BELIFT LAB (liên doanh giữa HYBE và CJ ENM). Nhóm chính thức ra mắt vào ngày 25 tháng 3 năm 2024 với mini-album đầu tay "SUPER REAL ME".</p>
-            
-            <p>Tên nhóm "ILLIT" là viết tắt của "I Will It", thể hiện thông điệp "Chúng tôi sẽ làm được" và tinh thần quyết tâm theo đuổi ước mơ. Nhóm nổi tiếng với phong cách âm nhạc Y2K retro kết hợp với hình ảnh độc đáo và đầy cá tính.</p>
-          </div>
-          
-          <div class="illit-highlights">
-            <div class="highlight-card">
-              <div class="highlight-value">5</div>
-              <div class="highlight-label">Thành viên</div>
-            </div>
-            <div class="highlight-card">
-              <div class="highlight-value">25.03.2024</div>
-              <div class="highlight-label">Ngày ra mắt</div>
-            </div>
-            <div class="highlight-card">
-              <div class="highlight-value">BELIFT LAB</div>
-              <div class="highlight-label">Công ty quản lý</div>
-            </div>
-            <div class="highlight-card">
-              <div class="highlight-value">#Magnetic</div>
-              <div class="highlight-label">Bài hit đầu tiên</div>
-            </div>
-          </div>
-          
-          <div class="section-title">Thành viên</div>
-          <div class="members">
-            <div class="member">
-              <div class="member-img">Y</div>
-              <div class="member-name">Yunah</div>
-              <div class="member-position">Leader</div>
-            </div>
-            <div class="member">
-              <div class="member-img">M</div>
-              <div class="member-name">Minju</div>
-              <div class="member-position">Main Vocal</div>
-            </div>
-            <div class="member">
-              <div class="member-img">M</div>
-              <div class="member-name">Moka</div>
-              <div class="member-position">Rapper</div>
-            </div>
-            <div class="member">
-              <div class="member-img">W</div>
-              <div class="member-name">Wonhee</div>
-              <div class="member-position">Vocal</div>
-            </div>
-            <div class="member">
-              <div class="member-img">I</div>
-              <div class="member-name">Iroha</div>
-              <div class="member-position">Main Dancer</div>
-            </div>
-          </div>
-          
-          <div class="section-title">Danh mục phát hành</div>
-          <div class="discography">
-            <div class="album">
-              <div class="album-cover">S</div>
-              <div class="album-info">
-                <div class="album-title">SUPER REAL ME</div>
-                <div class="album-date">25 tháng 3, 2024</div>
-              </div>
-            </div>
-          </div>
-          
-          <div class="section-title">Thành tựu</div>
-          <div class="illit-description">
-            <p>• "Magnetic" đạt #1 trên Billboard Global Excl. US</p>
-            <p>• Video "Magnetic" đạt 100 triệu view sau 1 tháng</p>
-            <p>• Album đầu tay bán được hơn 500,000 bản trong tuần đầu</p>
-            <p>• Nhóm mới có lượt nghe cao nhất trên Spotify 2024</p>
+
+    <!-- Phần thông tin nhóm bên phải -->
+    <div class="info-container">
+      <div class="illit-logo">ILLIT</div>
+      
+      <div class="illit-description">
+        <p>ILLIT (아일릿) là nhóm nhạc nữ Hàn Quốc được thành lập bởi BELIFT LAB (liên doanh giữa HYBE và CJ ENM). Nhóm chính thức ra mắt vào ngày 25 tháng 3 năm 2024 với mini-album đầu tay "SUPER REAL ME".</p>
+        
+        <p>Tên nhóm "ILLIT" là viết tắt của "I Will It", thể hiện thông điệp "Chúng tôi sẽ làm được" và tinh thần quyết tâm theo đuổi ước mơ. Nhóm nổi tiếng với phong cách âm nhạc Y2K retro kết hợp với hình ảnh độc đáo và đầy cá tính.</p>
+      </div>
+      
+      <div class="illit-highlights">
+        <div class="highlight-card">
+          <div class="highlight-value">5</div>
+          <div class="highlight-label">Thành viên</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-value">25.03.2024</div>
+          <div class="highlight-label">Ngày ra mắt</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-value">BELIFT LAB</div>
+          <div class="highlight-label">Công ty quản lý</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-value">#Magnetic</div>
+          <div class="highlight-label">Bài hit đầu tiên</div>
+        </div>
+      </div>
+      
+      <div class="section-title">Thành viên</div>
+      <div class="members">
+        <div class="member">
+          <div class="member-img">Y</div>
+          <div class="member-name">Yunah</div>
+          <div class="member-position">Leader</div>
+        </div>
+        <div class="member">
+          <div class="member-img">M</div>
+          <div class="member-name">Minju</div>
+          <div class="member-position">Main Vocal</div>
+        </div>
+        <div class="member">
+          <div class="member-img">M</div>
+          <div class="member-name">Moka</div>
+          <div class="member-position">Rapper</div>
+        </div>
+        <div class="member">
+          <div class="member-img">W</div>
+          <div class="member-name">Wonhee</div>
+          <div class="member-position">Vocal</div>
+        </div>
+        <div class="member">
+          <div class="member-img">I</div>
+          <div class="member-name">Iroha</div>
+          <div class="member-position">Main Dancer</div>
+        </div>
+      </div>
+      
+      <div class="section-title">Danh mục phát hành</div>
+      <div class="discography">
+        <div class="album">
+          <div class="album-cover">S</div>
+          <div class="album-info">
+            <div class="album-title">SUPER REAL ME</div>
+            <div class="album-date">25 tháng 3, 2024</div>
           </div>
         </div>
+      </div>
+      
+      <div class="section-title">Thành tựu</div>
+      <div class="illit-description">
+        <p>• "Magnetic" đạt #1 trên Billboard Global Excl. US</p>
+        <p>• Video "Magnetic" đạt 100 triệu view sau 1 tháng</p>
+        <p>• Album đầu tay bán được hơn 500,000 bản trong tuần đầu</p>
+        <p>• Nhóm mới có lượt nghe cao nhất trên Spotify 2024</p>
       </div>
     </div>
   </div>
@@ -648,116 +629,162 @@
   <script>
     // Player functionality
     document.addEventListener('DOMContentLoaded', function() {
+      const musicList = document.querySelector('.music-list');
+      const moreMusicBtn = document.querySelector('#more-music');
+      const closeBtn = document.querySelector('#close');
       const playPauseBtn = document.querySelector('.play-pause');
-      const playIcon = playPauseBtn.querySelector('.material-icons');
-      const progressBar = document.querySelector('.progress');
-      const currentTimeEl = document.querySelector('.current-time');
-      const durationEl = document.querySelector('.max-duration');
-      const songList = document.querySelectorAll('.music-list ul li');
+      const playIcon = playPauseBtn.querySelector('i');
+      const progressBar = document.querySelector('.progress-bar .progress');
+      const songTimer = document.querySelector('.song-timer');
+      const currentTime = songTimer.querySelector('.current-time');
+      const maxDuration = songTimer.querySelector('.max-duration');
+      const prevBtn = document.querySelector('#prev');
+      const nextBtn = document.querySelector('#next');
       const songName = document.querySelector('.song-details .name');
       const songArtist = document.querySelector('.song-details .artist');
-      const songImg = document.querySelector('.img-area img');
+      const audio = document.querySelector('#main-audio');
       
-      let isPlaying = false;
-      let currentSongIndex = 0;
-      
-      // Song data
-      const songs = [
+      // Sample music data
+      const allSongs = [
         {
           name: "Magnetic",
           artist: "ILLIT",
-          duration: "3:20",
-          cover: "https://i.ibb.co/ZcB1VkZ/illit-magnetic.jpg"
+          duration: "3:00"
         },
         {
           name: "Lucky Girl Syndrome",
           artist: "ILLIT",
-          duration: "3:12",
-          cover: "https://i.ibb.co/3r7bR9S/illit-lucky.jpg"
-        },
-        {
-          name: "Midnight Fiction",
-          artist: "ILLIT",
-          duration: "2:58",
-          cover: "https://i.ibb.co/0QqV8g2/illit-midnight.jpg"
+          duration: "2:45"
         },
         {
           name: "My World",
           artist: "ILLIT",
-          duration: "3:05",
-          cover: "https://i.ibb.co/1nGf8d0/illit-myworld.jpg"
+          duration: "3:20"
+        },
+        {
+          name: "Midnight Fiction",
+          artist: "ILLIT",
+          duration: "3:15"
         }
       ];
       
-      // Initialize player
+      let currentSongIndex = 0;
+      let isPlaying = false;
+      
+      // Toggle music list
+      moreMusicBtn.addEventListener('click', () => {
+        musicList.classList.toggle('show');
+      });
+      
+      closeBtn.addEventListener('click', () => {
+        musicList.classList.remove('show');
+      });
+      
+      // Play/Pause functionality
+      playPauseBtn.addEventListener('click', () => {
+        if (isPlaying) {
+          pauseSong();
+        } else {
+          playSong();
+        }
+      });
+      
+      function playSong() {
+        isPlaying = true;
+        playIcon.textContent = 'pause';
+        playPauseBtn.style.background = '#a6c1ee';
+        // In a real player, you would start the audio here
+      }
+      
+      function pauseSong() {
+        isPlaying = false;
+        playIcon.textContent = 'play_arrow';
+        playPauseBtn.style.background = '#fbc2eb';
+        // In a real player, you would pause the audio here
+      }
+      
+      // Update progress bar
+      function updateProgressBar() {
+        // For demo purposes, we'll simulate progress
+        if (isPlaying) {
+          const duration = 180; // 3 minutes in seconds
+          const current = Math.floor(Math.random() * duration);
+          
+          // Calculate progress percentage
+          const progressPercent = (current / duration) * 100;
+          progressBar.style.width = `${progressPercent}%`;
+          
+          // Format time
+          const formatTime = (time) => {
+            const minutes = Math.floor(time / 60);
+            const seconds = Math.floor(time % 60);
+            return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+          };
+          
+          currentTime.textContent = formatTime(current);
+          maxDuration.textContent = formatTime(duration);
+        }
+      }
+      
+      // Simulate progress bar movement
+      setInterval(updateProgressBar, 1000);
+      
+      // Switch songs
       function loadSong(index) {
-        const song = songs[index];
+        const song = allSongs[index];
         songName.textContent = song.name;
         songArtist.textContent = song.artist;
-        songImg.src = song.cover;
-        durationEl.textContent = song.duration;
+        maxDuration.textContent = song.duration;
+        currentTime.textContent = '0:00';
+        progressBar.style.width = '0%';
         
         // Update active song in playlist
-        songList.forEach((item, i) => {
+        const songs = document.querySelectorAll('.music-list ul li');
+        songs.forEach((song, i) => {
           if (i === index) {
-            item.classList.add('playing');
+            song.classList.add('playing');
           } else {
-            item.classList.remove('playing');
+            song.classList.remove('playing');
           }
         });
       }
       
-      // Play/Pause functionality
-      playPauseBtn.addEventListener('click', function() {
-        isPlaying = !isPlaying;
-        playIcon.textContent = isPlaying ? 'pause' : 'play_arrow';
+      // Next song
+      nextBtn.addEventListener('click', () => {
+        currentSongIndex++;
+        if (currentSongIndex >= allSongs.length) {
+          currentSongIndex = 0;
+        }
+        loadSong(currentSongIndex);
+        if (isPlaying) {
+          playSong();
+        }
       });
       
-      // Progress bar functionality
-      const progressContainer = document.querySelector('.progress-bar');
-      progressContainer.addEventListener('click', function(e) {
-        const width = this.clientWidth;
-        const clickX = e.offsetX;
-        const progressPercent = (clickX / width) * 100;
-        progressBar.style.width = `${progressPercent}%`;
-        
-        // Update time display (simplified)
-        const totalTime = 200; // 3:20 in seconds
-        const currentTime = (progressPercent / 100) * totalTime;
-        const minutes = Math.floor(currentTime / 60);
-        const seconds = Math.floor(currentTime % 60);
-        currentTimeEl.textContent = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+      // Previous song
+      prevBtn.addEventListener('click', () => {
+        currentSongIndex--;
+        if (currentSongIndex < 0) {
+          currentSongIndex = allSongs.length - 1;
+        }
+        loadSong(currentSongIndex);
+        if (isPlaying) {
+          playSong();
+        }
       });
       
-      // Song selection from playlist
-      songList.forEach((song, index) => {
-        song.addEventListener('click', function() {
+      // Select song from playlist
+      document.querySelectorAll('.music-list ul li').forEach((song, index) => {
+        song.addEventListener('click', () => {
           currentSongIndex = index;
           loadSong(currentSongIndex);
-          isPlaying = true;
-          playIcon.textContent = 'pause';
+          playSong();
+          musicList.classList.remove('show');
         });
       });
       
-      // Next/Prev buttons
-      document.getElementById('prev').addEventListener('click', function() {
-        currentSongIndex--;
-        if (currentSongIndex < 0) currentSongIndex = songs.length - 1;
-        loadSong(currentSongIndex);
-        isPlaying = true;
-        playIcon.textContent = 'pause';
-      });
-      
-      document.getElementById('next').addEventListener('click', function() {
-        currentSongIndex++;
-        if (currentSongIndex >= songs.length) currentSongIndex = 0;
-        loadSong(currentSongIndex);
-        isPlaying = true;
-        playIcon.textContent = 'pause';
-      });
-      
-      // Initialize the player with first song
-      loadSong(0);
+      // Initialize with first song
+      loadSong(currentSongIndex);
     });
   </script>
 </body>
