@@ -16,14 +16,14 @@
       background-attachment: fixed;
       background-size: cover;
       margin: 0;
-      padding: 0;
+      padding: 40px 0 30px; /* Tăng padding trên/dưới cho mọi nền tảng */
       min-height: 100vh;
       color: #ffffff;
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       position: relative;
       display: flex;
       flex-direction: column;
-      padding-top: 30px; /* Thêm padding-top để tạo khoảng trống */
+      box-sizing: border-box; /* Đảm bảo padding không ảnh hưởng đến chiều rộng */
     }
     
     body::before {
@@ -45,7 +45,7 @@
       z-index: 1;
       max-width: 600px;
       width: 90%;
-      margin: 0 auto 40px; /* Giảm margin-top */
+      margin: 0 auto; /* Điều chỉnh margin */
       padding: 25px;
       background: rgba(25, 25, 45, 0.7);
       backdrop-filter: blur(10px);
@@ -55,10 +55,10 @@
       flex: 1 0 auto;
     }
     
-    /* Phần còn lại giữ nguyên */
+    /* Tăng khoảng trống giữa các phần */
     .illit-info {
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 30px; /* Tăng margin dưới */
       padding: 25px;
       border-radius: 15px;
       background: rgba(255, 255, 255, 0.05);
@@ -71,7 +71,7 @@
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
-      margin-bottom: 20px;
+      margin-bottom: 25px; /* Tăng margin dưới */
       text-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
     
@@ -79,7 +79,7 @@
       font-size: 1rem;
       color: #e0e0ff;
       line-height: 1.7;
-      margin-bottom: 20px;
+      margin-bottom: 25px; /* Tăng margin dưới */
       text-align: left;
     }
     
@@ -88,7 +88,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
-      margin: 25px 0;
+      margin: 30px 0; /* Tăng margin trên/dưới */
     }
     
     .highlight-card {
@@ -104,7 +104,7 @@
       font-weight: bold;
       font-size: 1.3rem;
       color: #fbc2eb;
-      margin-bottom: 8px;
+      margin-bottom: 10px; /* Tăng margin dưới */
     }
     
     .highlight-label {
@@ -117,7 +117,7 @@
       flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
-      margin-top: 20px;
+      margin: 25px 0; /* Tăng margin trên/dưới */
     }
     
     .member {
@@ -130,7 +130,7 @@
       width: 60px;
       height: 60px;
       border-radius: 50%;
-      margin: 0 auto 8px;
+      margin: 0 auto 10px; /* Tăng margin dưới */
       background: linear-gradient(45deg, #ff9a9e, #fad0c4);
       display: flex;
       align-items: center;
@@ -143,7 +143,7 @@
     
     .member-name {
       font-weight: bold;
-      margin-bottom: 3px;
+      margin-bottom: 5px; /* Tăng margin dưới */
       font-size: 0.95rem;
     }
     
@@ -161,6 +161,7 @@
       flex-shrink: 0;
       background: rgba(0, 0, 0, 0.3);
       backdrop-filter: blur(5px);
+      margin-top: 20px; /* Thêm margin trên */
     }
     
     .designer-credit {
@@ -177,14 +178,14 @@
       font-size: 1.3rem;
       font-weight: bold;
       color: #fbc2eb;
-      margin: 20px 0 15px;
+      margin: 25px 0 20px; /* Tăng margin trên/dưới */
       text-align: left;
       border-left: 4px solid #fbc2eb;
       padding-left: 15px;
     }
     
     .discography {
-      margin-top: 20px;
+      margin-top: 25px; /* Tăng margin trên */
       padding: 15px;
       background: rgba(255, 255, 255, 0.03);
       border-radius: 12px;
@@ -193,7 +194,7 @@
     .album {
       display: flex;
       align-items: center;
-      margin-bottom: 12px;
+      margin-bottom: 15px; /* Tăng margin dưới */
       padding: 12px;
       border-radius: 10px;
       background: rgba(255, 255, 255, 0.05);
@@ -226,21 +227,22 @@
       color: #a6c1ee;
     }
 
-    /* Phần player */
+    /* Tăng khoảng trống cho phần player */
     .top-bar {
-      padding: 15px 0;
+      padding: 20px 0; /* Tăng padding */
     }
     
     .img-area {
-      margin: 20px auto;
+      margin: 25px auto; /* Tăng margin */
     }
     
     .song-details {
-      margin: 20px 0;
+      margin: 25px 0; /* Tăng margin */
     }
     
     .song-details .name {
       font-size: 1.5rem;
+      margin-bottom: 8px; /* Thêm margin dưới */
     }
     
     .song-details .artist {
@@ -248,15 +250,16 @@
     }
     
     .progress-area {
-      margin: 25px 0;
+      margin: 30px 0; /* Tăng margin */
     }
     
     .controls {
-      margin: 25px 0;
+      margin: 30px 0; /* Tăng margin */
     }
     
     .controls i.material-icons {
       font-size: 2rem;
+      margin: 0 10px; /* Thêm margin trái/phải */
     }
     
     .play-pause i.material-icons {
@@ -264,26 +267,94 @@
     }
     
     .music-list {
-      padding: 20px;
+      padding: 25px; /* Tăng padding */
     }
     
     .music-list .header {
-      padding: 15px;
+      padding: 20px; /* Tăng padding */
+      margin-bottom: 15px; /* Thêm margin dưới */
     }
 
-    /* Thêm khoảng trống phía trên cho mobile */
+    /* Điều chỉnh khoảng trống cho mọi nền tảng */
     @media (max-width: 768px) {
       body {
-        padding-top: 20px;
+        padding-top: 30px; /* Tăng padding-top */
+        padding-bottom: 20px;
       }
       
       .wrapper {
-        margin: 0 auto 20px;
         padding: 20px;
       }
       
       .illit-info {
         padding: 20px;
+        margin-bottom: 20px;
+      }
+      
+      .illit-logo {
+        font-size: 3rem;
+        margin-bottom: 20px;
+      }
+      
+      .section-title {
+        margin: 20px 0 15px;
+      }
+      
+      .members {
+        gap: 15px;
+        margin: 20px 0;
+      }
+      
+      .member {
+        width: 75px;
+      }
+      
+      .member-img {
+        width: 50px;
+        height: 50px;
+        font-size: 1.3rem;
+      }
+      
+      /* Giảm khoảng trống cho các phần player trên mobile */
+      .top-bar {
+        padding: 15px 0;
+      }
+      
+      .img-area {
+        margin: 15px auto;
+      }
+      
+      .song-details {
+        margin: 15px 0;
+      }
+      
+      .progress-area {
+        margin: 20px 0;
+      }
+      
+      .controls {
+        margin: 20px 0;
+      }
+      
+      .music-list {
+        padding: 15px;
+      }
+    }
+    
+    @media (min-width: 1200px) {
+      /* Tăng khoảng trống cho màn hình lớn */
+      body {
+        padding-top: 50px;
+        padding-bottom: 40px;
+      }
+      
+      .wrapper {
+        max-width: 650px;
+        padding: 30px;
+      }
+      
+      .illit-info {
+        padding: 30px;
       }
     }
   </style>
