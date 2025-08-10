@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -216,6 +216,7 @@
       border-radius: 10px;
       margin-bottom: 10px;
       cursor: pointer;
+      position: relative;
     }
     
     .progress-bar .progress {
@@ -601,64 +602,59 @@
     </div>
     
     <!-- Player Tab -->
-  <div class="wrapper">
+    <div id="player-tab" class="tab-content active">
+      <div class="wrapper">
         <div class="top-bar">
-            <i class="material-icons">expand_more</i>
-            <span>Đang phát bài</span>
-            <i class="material-icons">more_horiz</i>
+          <i class="material-icons">expand_more</i>
+          <span>Đang phát bài</span>
+          <i class="material-icons">more_horiz</i>
         </div>
 
         <div class="img-area">
-            <img src="" alt="">
-          
+          <img src="https://i.ibb.co/6mK6y0F/illit-magnetic.jpg" alt="ILLIT Magnetic">
         </div>
 
         <div class="song-details">
-            <p class="name"></p>
-            <p class="artist"></p>
+          <p class="name">Magnetic</p>
+          <p class="artist">ILLIT</p>
         </div>
 
         <div class="progress-area">
-            <div class="progress-bar">
-                <audio src="" id="main-audio"></audio>
-            </div>
-            <div class="song-timer">
-                <span class="current-time">
-                    0:00
-                </span>
-                <span class="max-duration">
-                    0:00
-                </span>
-            </div>
+          <div class="progress-bar">
+            <div class="progress"></div>
+            <audio src="" id="main-audio" style="display: none;"></audio>
+          </div>
+          <div class="song-timer">
+            <span class="current-time">0:00</span>
+            <span class="max-duration">0:00</span>
+          </div>
         </div>
 
         <div class="controls">
-            <i id="repeat-plist" class="material-icons" title="Playlist looped">repeat</i>
-            <i id="prev" class="material-icons" >skip_previous</i>
-            <div class="play-pause">
-                <i class="material-icons play" >play_arrow</i>
-            </div>
-            <i id="next" class="material-icons" >skip_next</i>
-            <i id="more-music" class="material-icons" >queue_music</i>
+          <i id="repeat-plist" class="material-icons" title="Playlist looped">repeat</i>
+          <i id="prev" class="material-icons">skip_previous</i>
+          <div class="play-pause">
+            <i class="material-icons play">play_arrow</i>
+          </div>
+          <i id="next" class="material-icons">skip_next</i>
+          <i id="more-music" class="material-icons">queue_music</i>
         </div>
 
         <div class="music-list">
-            <div class="header">
-                <div class="row">
-                    <i class="list material-icons">queue_music</i>
-                    <span>Danh sách bài hát</span>
-                </div>
-                <i id="close" class="material-icons">close</i>
+          <div class="header">
+            <div class="row">
+              <i class="list material-icons">queue_music</i>
+              <span>Danh sách bài hát</span>
             </div>
-            <ul>
-              
-            </ul>
+            <i id="close" class="material-icons">close</i>
+          </div>
+          <ul>
+            <!-- Danh sách nhạc sẽ được thêm bằng JavaScript -->
+          </ul>
         </div>
+      </div>
     </div>
-
-    <script src="./js/music-list.js"></script>
-    <script src="./js/script.js"></script>
-
+    
     <!-- Info Tab -->
     <div id="info-tab" class="tab-content">
       <div class="info-tab">
@@ -847,19 +843,96 @@
       });
     });
     
+    // Music list data
+    const musicList = [
+      {
+        name: "Magnetic",
+        artist: "ILLIT",
+        src: "https://example.com/magnetic.mp3", // Placeholder URL
+        img: "https://i.ibb.co/6mK6y0F/illit-magnetic.jpg",
+        duration: "3:10"
+      },
+      {
+        name: "Lucky Girl Syndrome",
+        artist: "ILLIT",
+        src: "https://example.com/lucky-girl.mp3",
+        img: "https://i.ibb.co/3Y4VcWb/yunah.jpg",
+        duration: "2:55"
+      },
+      {
+        name: "My World",
+        artist: "ILLIT",
+        src: "https://example.com/my-world.mp3",
+        img: "https://i.ibb.co/L9W9M2Q/minju.jpg",
+        duration: "3:22"
+      },
+      {
+        name: "Midnight Fiction",
+        artist: "ILLIT",
+        src: "https://example.com/midnight-fiction.mp3",
+        img: "https://i.ibb.co/6XHdX7b/moka.jpg",
+        duration: "3:05"
+      }
+    ];
+    
     // Player functionality
     const wrapper = document.querySelector('.wrapper');
     const playPauseBtn = document.querySelector('.play-pause');
     const playIcon = document.querySelector('.play');
     const progressBar = document.querySelector('.progress');
+    const progressArea = document.querySelector('.progress-bar');
     const currentTimeEl = document.querySelector('.current-time');
     const maxDurationEl = document.querySelector('.max-duration');
     const musicListBtn = document.querySelector('#more-music');
-    const musicList = document.querySelector('.music-list');
+    const musicListContainer = document.querySelector('.music-list');
     const closeMusicList = document.querySelector('#close');
-    const allSongs = document.querySelectorAll('ul li');
+    const songName = document.querySelector('.song-details .name');
+    const songArtist = document.querySelector('.song-details .artist');
+    const songImg = document.querySelector('.img-area img');
+    const mainAudio = document.getElementById('main-audio');
+    const ulTag = document.querySelector('.music-list ul');
     
     let isPlaying = false;
+    let currentMusicIndex = 0;
+    
+    // Load music list
+    function loadMusicList() {
+      ulTag.innerHTML = '';
+      
+      musicList.forEach((music, index) => {
+        let liTag = `
+          <li data-index="${index}">
+            <div class="row">
+              <div class="details">
+                <span class="name">${music.name}</span>
+                <span class="artist">${music.artist}</span>
+              </div>
+              <span class="audio-duration">${music.duration}</span>
+            </div>
+          </li>
+        `;
+        
+        ulTag.insertAdjacentHTML('beforeend', liTag);
+      });
+      
+      // Set first song as active
+      const allLiTags = ulTag.querySelectorAll('li');
+      allLiTags[currentMusicIndex].classList.add('playing');
+    }
+    
+    // Load music data
+    function loadMusic(index) {
+      const music = musicList[index];
+      songName.textContent = music.name;
+      songArtist.textContent = music.artist;
+      songImg.src = music.img;
+      mainAudio.src = music.src;
+      
+      // Update active song in playlist
+      const allLiTags = ulTag.querySelectorAll('li');
+      allLiTags.forEach(li => li.classList.remove('playing'));
+      allLiTags[index].classList.add('playing');
+    }
     
     // Play/Pause functionality
     playPauseBtn.addEventListener('click', () => {
@@ -867,90 +940,113 @@
       if (isPlaying) {
         playIcon.textContent = 'pause';
         wrapper.classList.add('playing');
+        mainAudio.play();
       } else {
         playIcon.textContent = 'play_arrow';
         wrapper.classList.remove('playing');
+        mainAudio.pause();
       }
+    });
+    
+    // Update progress bar
+    mainAudio.addEventListener('timeupdate', (e) => {
+      const currentTime = e.target.currentTime;
+      const duration = e.target.duration;
+      
+      let progressWidth = (currentTime / duration) * 100;
+      progressBar.style.width = `${progressWidth}%`;
+      
+      currentTimeEl.textContent = formatTime(currentTime);
+      
+      if (!isNaN(duration)) {
+        maxDurationEl.textContent = formatTime(duration);
+      }
+    });
+    
+    // Format time
+    function formatTime(time) {
+      const min = Math.floor(time / 60);
+      const sec = Math.floor(time % 60);
+      return `${min}:${sec < 10 ? '0' : ''}${sec}`;
+    }
+    
+    // Skip to position in song
+    progressArea.addEventListener('click', (e) => {
+      let progressWidth = progressArea.clientWidth;
+      let clickedOffsetX = e.offsetX;
+      let songDuration = mainAudio.duration;
+      
+      mainAudio.currentTime = (clickedOffsetX / progressWidth) * songDuration;
     });
     
     // Music list toggle
     musicListBtn.addEventListener('click', () => {
-      musicList.classList.add('show');
+      musicListContainer.classList.add('show');
     });
     
     closeMusicList.addEventListener('click', () => {
-      musicList.classList.remove('show');
+      musicListContainer.classList.remove('show');
     });
     
     // Song selection
-    allSongs.forEach(song => {
-      song.addEventListener('click', () => {
-        // Remove playing class from all songs
-        allSongs.forEach(s => s.classList.remove('playing'));
-        
-        // Add playing class to selected song
-        song.classList.add('playing');
-        
-        // Get song details
-        const songName = song.querySelector('.name').textContent;
-        const artistName = song.querySelector('.artist').textContent;
-        
-        // Update player display
-        document.querySelector('.song-details .name').textContent = songName;
-        document.querySelector('.song-details .artist').textContent = artistName;
-        
-        // Close music list
-        musicList.classList.remove('show');
-        
-        // Start playing
-        isPlaying = true;
-        playIcon.textContent = 'pause';
-        wrapper.classList.add('playing');
-      });
-    });
-    
-    // Progress bar functionality
-    function updateProgress(e) {
-      const { duration, currentTime } = { duration: 190, currentTime: 45 }; // Mock data
-      const progressPercent = (currentTime / duration) * 100;
-      progressBar.style.width = `${progressPercent}%`;
+    ulTag.addEventListener('click', (e) => {
+      const li = e.target.closest('li');
+      if (!li) return;
       
-      // Format time
-      currentTimeEl.textContent = formatTime(currentTime);
-      maxDurationEl.textContent = formatTime(duration);
-    }
-    
-    function formatTime(seconds) {
-      const min = Math.floor(seconds / 60);
-      const sec = Math.floor(seconds % 60);
-      return `${min}:${sec < 10 ? '0' : ''}${sec}`;
-    }
-    
-    // Update progress every second
-    setInterval(updateProgress, 1000);
+      const index = parseInt(li.getAttribute('data-index'));
+      if (index === currentMusicIndex && isPlaying) return;
+      
+      currentMusicIndex = index;
+      loadMusic(currentMusicIndex);
+      
+      if (isPlaying) {
+        mainAudio.play();
+      }
+      
+      musicListContainer.classList.remove('show');
+    });
     
     // Skip to next/previous song
     document.getElementById('next').addEventListener('click', () => {
-      const currentSong = document.querySelector('ul li.playing');
-      let nextSong = currentSong.nextElementSibling;
+      currentMusicIndex = (currentMusicIndex + 1) % musicList.length;
+      loadMusic(currentMusicIndex);
       
-      if (!nextSong) {
-        nextSong = document.querySelector('ul li:first-child');
+      if (isPlaying) {
+        mainAudio.play();
       }
-      
-      nextSong.click();
     });
     
     document.getElementById('prev').addEventListener('click', () => {
-      const currentSong = document.querySelector('ul li.playing');
-      let prevSong = currentSong.previousElementSibling;
+      currentMusicIndex = (currentMusicIndex - 1 + musicList.length) % musicList.length;
+      loadMusic(currentMusicIndex);
       
-      if (!prevSong) {
-        prevSong = document.querySelector('ul li:last-child');
+      if (isPlaying) {
+        mainAudio.play();
       }
-      
-      prevSong.click();
     });
+    
+    // Repeat playlist
+    const repeatBtn = document.getElementById('repeat-plist');
+    let isRepeat = false;
+    
+    repeatBtn.addEventListener('click', () => {
+      isRepeat = !isRepeat;
+      repeatBtn.style.color = isRepeat ? '#ff6ec4' : '#d0cde7';
+    });
+    
+    // When song ends
+    mainAudio.addEventListener('ended', () => {
+      if (isRepeat) {
+        mainAudio.currentTime = 0;
+        mainAudio.play();
+      } else {
+        document.getElementById('next').click();
+      }
+    });
+    
+    // Initialize
+    loadMusicList();
+    loadMusic(currentMusicIndex);
   </script>
 </body>
 </html>
