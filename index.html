@@ -7,63 +7,105 @@
   <link rel="stylesheet" href="./style.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
 </head>
+<body>
     <div class="wrapper">
-        <div class="top-bar">
-            <i class="material-icons">expand_more</i>
-            <span>Đang phát bài</span>
-            <i class="material-icons">more_horiz</i>
-        </div>
+        <!-- Nội dung hiện tại của trình phát nhạc -->
+    </div>
 
-        <div class="img-area">
-            <img src="" alt="">
-          
-        </div>
-
-        <div class="song-details">
-            <p class="name"></p>
-            <p class="artist"></p>
-        </div>
-
-        <div class="progress-area">
-            <div class="progress-bar">
-                <audio src="" id="main-audio"></audio>
+    <!-- Phần thông tin ILLIT được thêm vào -->
+    <div class="illit-info">
+        <h1>ILLIT</h1>
+        <p>ILLIT (아일릿) là nhóm nhạc nữ Hàn Quốc được thành lập bởi BELIFT LAB (liên doanh giữa HYBE và CJ ENM). Nhóm chính thức ra mắt vào ngày 25 tháng 3 năm 2024 với mini-album đầu tay "SUPER REAL ME".</p>
+        <p>Tên nhóm "ILLIT" là viết tắt của "I Will It", thể hiện thông điệp "Chúng tôi sẽ làm được" và tinh thần quyết tâm theo đuổi ước mơ. Nhóm nổi tiếng với phong cách âm nhạc Y2K retro kết hợp với hình ảnh độc đáo và đầy cá tính.</p>
+        
+        <div class="basic-info">
+            <div class="info-item">
+                <span class="number">5</span>
+                <span class="label">Thành viên</span>
             </div>
-            <div class="song-timer">
-                <span class="current-time">
-                    0:00
-                </span>
-                <span class="max-duration">
-                    0:00
-                </span>
+            <div class="info-item">
+                <span class="date">25.03.2024</span>
+                <span class="label">Ngày ra mắt</span>
+            </div>
+            <div class="info-item">
+                <span class="company">BELIFT LAB</span>
+                <span class="label">Công ty quản lý</span>
+            </div>
+            <div class="info-item">
+                <span class="hashtag">#Magnetic</span>
+                <span class="label">Bài hit đầu tiên</span>
             </div>
         </div>
-
-        <div class="controls">
-            <i id="repeat-plist" class="material-icons" title="Playlist looped">repeat</i>
-            <i id="prev" class="material-icons" >skip_previous</i>
-            <div class="play-pause">
-                <i class="material-icons play" >play_arrow</i>
-            </div>
-            <i id="next" class="material-icons" >skip_next</i>
-            <i id="more-music" class="material-icons" >queue_music</i>
-        </div>
-
-        <div class="music-list">
-            <div class="header">
-                <div class="row">
-                    <i class="list material-icons">queue_music</i>
-                    <span>Danh sách bài hát</span>
+        
+        <div class="members-section">
+            <h2>Thành viên</h2>
+            <div class="members">
+                <div class="member">
+                    <span class="initial">Y</span>
+                    <div class="member-info">
+                        <span class="name">Yunah</span>
+                        <span class="position">Leader</span>
+                    </div>
                 </div>
-                <i id="close" class="material-icons">close</i>
+                <div class="member">
+                    <span class="initial">M</span>
+                    <div class="member-info">
+                        <span class="name">Minju</span>
+                        <span class="position">Main Vocal</span>
+                    </div>
+                </div>
+                <div class="member">
+                    <span class="initial">M</span>
+                    <div class="member-info">
+                        <span class="name">Moka</span>
+                        <span class="position">Rapper</span>
+                    </div>
+                </div>
+                <div class="member">
+                    <span class="initial">W</span>
+                    <div class="member-info">
+                        <span class="name">Wonhee</span>
+                        <span class="position">Vocal</span>
+                    </div>
+                </div>
+                <div class="member">
+                    <span class="initial">I</span>
+                    <div class="member-info">
+                        <span class="name">Iroha</span>
+                        <span class="position">Main Dancer</span>
+                    </div>
+                </div>
             </div>
+        </div>
+        
+        <div class="discography">
+            <h2>Danh mục phát hành</h2>
+            <div class="album">
+                <span class="album-initial">S</span>
+                <div class="album-info">
+                    <span class="album-title">SUPER REAL ME</span>
+                    <span class="album-date">25 tháng 3, 2024</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="achievements">
+            <h2>Thành tựu</h2>
             <ul>
-              
+                <li>"Magnetic" đạt #1 trên Billboard Global Excl. US</li>
+                <li>Video "Magnetic" đạt 100 triệu view sau 1 tháng</li>
+                <li>Album đầu tay bán được hơn 500,000 bản trong tuần đầu</li>
+                <li>Nhóm mới có lượt nghe cao nhất trên Spotify 2024</li>
             </ul>
+        </div>
+        
+        <div class="copyright">
+            <p>© 2024 ILLIT Music Player | BELIFT LAB</p>
+            <p>Thiết kế bởi Haruto Kairi (chieunguyen2002)</p>
         </div>
     </div>
 
     <script src="./js/music-list.js"></script>
     <script src="./js/script.js"></script>
- 
 </body>
 </html>
