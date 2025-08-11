@@ -79,7 +79,7 @@ let allMusic = [
     src: "CherishMyLove"
   },
   {
-    name: "I'll Like You",
+    name: "I ll Like You",
     artist: "ILLIT",
     img: "IwillLikeYou",
     src: "IwillLikeYou"
