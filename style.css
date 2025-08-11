@@ -22,12 +22,17 @@
   --pinkshadow: #ffcbdd;
   --lightbshadow: rgba(0, 0, 0, 0.15);
 }
+
+
 body {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   background: #525d70;
+   background-color: #1f1f27; /* hoặc màu nền bạn muốn */
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* @media (max-width: 768px) {
@@ -311,4 +316,3 @@ ul li.playing {
   color: var(--violet);
 }
 
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
