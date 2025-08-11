@@ -45,14 +45,27 @@ body {
     width: 95%;
   }
 } */
-@media (min-width: 1200px) {
-  body {
-font-size: 16px;
+@media (max-width: 768px) {
+  .wrapper {
+    max-width: 100%;
+    padding: 15px;
+    border-radius: 15px;
   }
-  .container {
-    width: 80%;
+
+  .img-area {
+    width: 200px;
+    height: 200px;
+  }
+
+  .song-details .name {
+    font-size: 1.4rem;
+  }
+
+  .song-details .artist {
+    font-size: 1rem;
   }
 }
+
 
     
 
@@ -64,6 +77,14 @@ font-size: 16px;
   border-radius: 15px;
   background: #1f1f27;
   box-shadow: 0px 6px 15px var(--lightbshadow);
+
+  
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+
+  
+  
 }
 .wrapper i {
   cursor: pointer;
