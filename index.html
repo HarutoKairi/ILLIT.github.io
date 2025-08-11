@@ -406,7 +406,7 @@
   background: rgba(30, 20, 60, 0.95);
   backdrop-filter: blur(10px);
   width: 100%;
-  height: 1000px;  /* Đổi từ 100% thành auto để tự mở rộng theo nội dung */
+  height: auto;  /* Đổi từ 100% thành auto để tự mở rộng theo nội dung */
 /*  min-height: auto; /*  Đảm bảo ít nhất bằng parent */
   top: 0;
   left: 0;
@@ -416,7 +416,7 @@
   transition: transform 0.3s ease;
   z-index: 10;
   overflow-y: auto;  /* Giữ cuộn nếu quá dài */
-  max-height: 90vh;  /* Giới hạn tối đa để tránh tràn màn hình, điều chỉnh theo nhu cầu */
+  max-height: 400vh;  /* Giới hạn tối đa để tránh tràn màn hình, điều chỉnh theo nhu cầu */
 }
     
     .music-list.show {
@@ -459,6 +459,7 @@
     
     .music-list ul {
       list-style: none;
+        max-height: 800px;
     }
     
     .music-list ul li {
