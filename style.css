@@ -126,7 +126,7 @@ body {
 .top-bar span {
   font-size: 18px;
   margin-left: -3px;
-  color: var(--white);
+  color: #1f1f27; /* var(--white); */
 }
 
 /*
