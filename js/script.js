@@ -39,6 +39,16 @@ function pauseMusic(){
   mainAudio.pause();
 }
 
+
+function prevMusic() {
+  musicIndex--;
+  if (musicIndex < 1) musicIndex = allMusic.length;
+  loadMusic(musicIndex);
+  playMusic();
+  playingSong();
+}
+
+/*
 function prevMusic(){
   musicIndex--; 
   musicIndex < 1 ? musicIndex = allMusic.length : musicIndex = musicIndex;
@@ -46,6 +56,8 @@ function prevMusic(){
   playMusic();
   playingSong(); 
 }
+
+*/
 
 function nextMusic(){
   musicIndex++; 
@@ -69,7 +81,40 @@ nextBtn.addEventListener("click", ()=>{
   nextMusic();
 });
 
-// SỬA LỖI PHẦN PROGRESS BAR
+
+
+// Thêm một lần, bên ngoài các listener khác
+mainAudio.addEventListener("loadeddata", () => {
+  let musicDuration = wrapper.querySelector(".max-duration");  // Sửa lỗi chính tả cho rõ ràng
+  let mainAdDuration = mainAudio.duration;
+  let totalMin = Math.floor(mainAdDuration / 60);
+  let totalSec = Math.floor(mainAdDuration % 60);
+  if (totalSec < 10) {
+    totalSec = `0${totalSec}`;
+  }
+  musicDuration.innerText = `${totalMin}:${totalSec}`;
+});
+
+// Sau đó, listener timeupdate (không có loadeddata lồng)
+mainAudio.addEventListener("timeupdate", (e) => {
+  const currentTime = e.target.currentTime;
+  const duration = e.target.duration;
+  let progressWidth = (currentTime / duration) * 100;
+  progressBar.style.width = `${progressWidth}%`;
+
+  let musicCurrentTime = wrapper.querySelector(".current-time");
+  let currentMin = Math.floor(currentTime / 60);
+  let currentSec = Math.floor(currentTime % 60);
+  if (currentSec < 10) {
+    currentSec = `0${currentSec}`;
+  }
+  musicCurrentTime.innerText = `${currentMin}:${currentSec}`;
+});
+
+
+
+// SỬA LỖI PHẦN PROGRESS BAR 
+/*
 mainAudio.addEventListener("timeupdate", (e)=>{
   const currentTime = e.target.currentTime; 
   const duration = e.target.duration; 
@@ -97,6 +142,7 @@ mainAudio.addEventListener("timeupdate", (e)=>{
   musicCurrentTime.innerText = `${currentMin}:${currentSec}`;
 });
 
+*/
 
 // SỬA LỖI CLICK TRÊN PROGRESS AREA
 progressArea.addEventListener("click", (e)=>{
