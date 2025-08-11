@@ -24,18 +24,35 @@
 }
 
 
+html, body {
+  height: 100%;
+  background-color: #1f1f27;
+  margin: 0;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+body {
+  height: 100vh;
+  height: calc(100vh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
+  background-color: #1f1f27;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+
+/*
 body {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 100vh;
-  /* background: #525d70; */
-   background-color: #525d70; /*1f1f27 hoặc màu nền bạn muốn */
+   background: #525d70; 
+   background-color: #525d70; /*1f1f27 hoặc màu nền bạn muốn 
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
   margin: 0;
 }
-
+*/
 /* @media (max-width: 768px) {
   body {
     font-size: 14px;
