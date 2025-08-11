@@ -12,6 +12,19 @@ musicList = wrapper.querySelector(".music-list"),
 moreMusicBtn = wrapper.querySelector("#more-music"),
 closemoreMusic = musicList.querySelector("#close");
 
+
+
+document.addEventListener('DOMContentLoaded', () => {
+  const playButton = document.querySelector('.play-pause');
+  if (playButton) {
+    playButton.addEventListener('click', () => {
+      // hành động khi nhấn nút phát/tạm dừng
+    });
+  }
+});
+
+
+
 let musicIndex = Math.floor((Math.random() * allMusic.length) + 1);
 isMusicPaused = true;
 
@@ -220,6 +233,7 @@ for (let i = 0; i < allMusic.length; i++) {
 
   let liAudioDurationTag = ulTag.querySelector(`#${allMusic[i].src}`);
   let liAudioTag = ulTag.querySelector(`.${allMusic[i].src}`);
+  
   liAudioTag.addEventListener("loadeddata", ()=>{
     let duration = liAudioTag.duration;
     let totalMin = Math.floor(duration / 60);
