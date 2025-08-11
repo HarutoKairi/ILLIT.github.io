@@ -90,7 +90,7 @@ let allMusic = [
     artist: "ILLIT",
     img: "Almond Chocolate KoreanVer",
     src: "Almond Chocolate KoreanVer"
-  },
+  }, 
 
   
 
