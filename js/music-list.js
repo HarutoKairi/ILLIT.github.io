@@ -61,7 +61,7 @@ let allMusic = [
     src: "Bamsopoong"
   },
     {
-    name: "Oops!",
+    name: "Oops",
     artist: "ILLIT",
     img: "Oops",
     src: "Oops"
