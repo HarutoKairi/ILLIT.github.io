@@ -13,6 +13,14 @@ moreMusicBtn = wrapper.querySelector("#more-music"),
 closemoreMusic = musicList.querySelector("#close");
 
 
+const playButton = document.getElementById('playButton');
+if (playButton) {
+  playButton.addEventListener('click', () => {
+    // xử lý khi nhấn nút
+  });
+}
+
+
 
 document.addEventListener('DOMContentLoaded', () => {
   const playButton = document.querySelector('.play-pause');
@@ -274,3 +282,6 @@ function clicked(element){
   playMusic();
   playingSong();
 }
+
+<script src="script.js" defer></script>
+
