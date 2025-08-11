@@ -20,6 +20,8 @@ if (playButton) {
   });
 }
 
+
+/*
 const btn = document.getElementById('play-btn');
 btn?.addEventListener('click', handlePlay);
 
@@ -29,7 +31,7 @@ if (btn) {
 } else {
   console.warn('Không tìm thấy #play-btn trong DOM');
 }
-
+*/
 
 document.addEventListener('DOMContentLoaded', () => {
   const btn = document.querySelector('#play-btn');
