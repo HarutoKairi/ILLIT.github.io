@@ -207,7 +207,10 @@
       font-size: 1.2rem;
       color: #a29ebd;
     }
-    
+
+
+
+    /*
     .progress-area {
       margin-bottom: 30px;
     }
@@ -219,6 +222,9 @@
       border-radius: 10px;
       margin-bottom: 10px;
       cursor: pointer;
+      
+      position: relative;
+      
     }
     
     .progress-bar .progress {
@@ -227,9 +233,11 @@
       background: linear-gradient(90deg, #ff6ec4, #7873f5);
       border-radius: 10px;
       position: relative;
+
+       transition: width 0.1s linear;
     }
     
-    .progress-bar .progress::before {
+  .progress-bar .progress::before {
       content: '';
       position: absolute;
       height: 12px;
@@ -240,7 +248,20 @@
       top: 50%;
       transform: translateY(-50%);
       box-shadow: 0 0 10px rgba(120, 115, 245, 0.8);
+    /*  transition: opacity 0.2s ease; 
+      opacity: 1;
     }
+
+
+
+    
+  
+
+     .progress-bar:hover .progress::before {
+      opacity: 1;
+    }
+    
+
     
     .song-timer {
       display: flex;
@@ -248,8 +269,58 @@
       color: #a29ebd;
       font-size: 0.9rem;
     }
+    */
+
+.progress-area {
+  height: 6px;
+  width: 100%;
+  border-radius: 50px;
+  background: #f0f0f0;
+  cursor: pointer;
+}
+.progress-area .progress-bar {
+  height: inherit;
+  width: 0%;
+  position: relative;
+  border-radius: inherit;
+  background: #df73b3;
+}
+.progress-bar::before {
+  content: "";
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  top: 50%;
+  right: -5px;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-50%);
+  background: inherit;
+  transition: opacity 0.2s ease;
+}
+.progress-area:hover .progress-bar::before {
+  opacity: 1;
+  pointer-events: none;
+}
+.progress-area .song-timer {
+  margin-top: 2px;
+}
+.song-timer span {
+  margin-top: 10px;
+  font-size: 13px;
+  color: var(--lightback);
+}
+
+
+
+
+
     
     .controls {
+
+        margin-top: 30px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -621,7 +692,9 @@
           <p class="artist"></p>
         </div>
 
-        <div class="progress-area">
+
+        
+               <div class="progress-area">
           <div class="progress-bar">
             <audio src="" id="main-audio"></audio>
             <div class="progress"></div>
@@ -631,6 +704,7 @@
             <span class="max-duration">1:00</span>
           </div>
         </div>
+
 
         <div class="controls">
           <i id="repeat-plist" class="material-icons" title="Playlist looped">repeat</i>
