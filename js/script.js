@@ -20,8 +20,26 @@ if (playButton) {
   });
 }
 
+const btn = document.getElementById('play-btn');
+btn?.addEventListener('click', handlePlay);
+
+const btn = document.querySelector('#play-btn');
+if (btn) {
+  btn.addEventListener('click', handlePlay);
+} else {
+  console.warn('Không tìm thấy #play-btn trong DOM');
+}
 
 
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.querySelector('#play-btn');
+  if (btn) {
+    btn.addEventListener('click', handlePlay);
+  }
+});
+
+
+/*
 document.addEventListener('DOMContentLoaded', () => {
   const playButton = document.querySelector('.play-pause');
   if (playButton) {
@@ -30,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 });
-
+*/
 
 
 let musicIndex = Math.floor((Math.random() * allMusic.length) + 1);
