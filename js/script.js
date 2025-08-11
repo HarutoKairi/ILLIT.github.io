@@ -283,5 +283,5 @@ function clicked(element){
   playingSong();
 }
 
-<script src="script.js" defer></script>
+
 
