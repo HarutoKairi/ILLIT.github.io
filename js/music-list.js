@@ -63,8 +63,8 @@ let allMusic = [
     {
     name: "Oops!",
     artist: "ILLIT",
-    img: "Oops!",
-    src: "Oops!"
+    img: "Oops",
+    src: "Oops"
   },
       {
     name: "Pimple",
@@ -88,8 +88,8 @@ let allMusic = [
   {
     name: "I'll Like You",
     artist: "ILLIT",
-    img: "I'll_Like_You",
-    src: "I'll_Like_You"
+    img: "IwillLikeYou",
+    src: "IwillLikeYou"
   }, 
 
 ];
