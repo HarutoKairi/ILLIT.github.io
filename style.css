@@ -94,6 +94,8 @@ body {
   opacity: 0.9;
   line-height: 35px;
 }
+
+
 .progress-area {
   height: 6px;
   width: 100%;
@@ -135,6 +137,9 @@ body {
   font-size: 13px;
   color: var(--lightback);
 }
+
+
+
 .controls {
   margin: 40px 0 5px 0;
 }
