@@ -32,7 +32,7 @@ body {
 .wrapper {
   width: 380px;
   padding: 25px 30px;
-  overflow: hidden;
+/*  overflow: hidden; */
   position: relative;
   border-radius: 15px;
   background: #1f1f27;
