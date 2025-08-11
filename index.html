@@ -366,7 +366,7 @@
     }
     
     /* Music List */
-    .music-list {
+/*    .music-list {
       position: absolute;
       background: rgba(30, 20, 60, 0.95);
       backdrop-filter: blur(10px);
@@ -381,6 +381,26 @@
       z-index: 10;
       overflow-y: auto;
     }
+
+*/
+
+    .music-list {
+  position: absolute;
+  background: rgba(30, 20, 60, 0.95);
+  backdrop-filter: blur(10px);
+  width: 100%;
+  height: auto;  /* Đổi từ 100% thành auto để tự mở rộng theo nội dung */
+  min-height: 100%;  /* Đảm bảo ít nhất bằng parent */
+  top: 0;
+  left: 0;
+  border-radius: 25px;
+  padding: 25px;
+  transform: translateX(100%);
+  transition: transform 0.3s ease;
+  z-index: 10;
+  overflow-y: auto;  /* Giữ cuộn nếu quá dài */
+  max-height: 80vh;  /* Giới hạn tối đa để tránh tràn màn hình, điều chỉnh theo nhu cầu */
+}
     
     .music-list.show {
       transform: translateX(0);
