@@ -28,11 +28,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
+  height: 100vh;
   /* background: #525d70; */
    background-color: #525d70; /*1f1f27 hoặc màu nền bạn muốn */
   padding-top: env(safe-area-inset-top);
   padding-bottom: env(safe-area-inset-bottom);
+  margin: 0;
 }
 
 /* @media (max-width: 768px) {
@@ -90,6 +91,8 @@ font-size: 16px;
   margin-left: -3px;
   color: var(--white);
 }
+
+/*
 .img-area {
   width: 100%;
   height: 256px;
@@ -97,7 +100,28 @@ font-size: 16px;
   margin-top: 25px;
   border-radius: 15px;
   box-shadow: 0px 6px 12px var(--lightbshadow);
+}  */
+
+.img-area {
+  position: relative;
+  width: 100%;
+  height: 360px;
+  overflow: hidden;
+  border-radius: 25px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  background-size: cover;
+  background-position: center;
 }
+
+.img-area::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(20px);
+}
+
+
+
 .img-area img {
   width: 100%;
   height: 100%;
@@ -167,8 +191,23 @@ font-size: 16px;
 
 
 .controls {
+  backdrop-filter: blur(10px);
+  background: rgba(30, 30, 30, 0.4);
+  border-radius: 20px;
+  padding: 10px 15px;
+   position: fixed;
+  bottom: env(safe-area-inset-bottom);
+  left: 0;
+  width: 100%;
+}
+
+/*
+.controls {
   margin: 40px 0 5px 0;
 }
+
+*/
+
 .controls i {
   font-size: 28px;
   user-select: none;
