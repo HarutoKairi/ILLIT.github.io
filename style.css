@@ -30,7 +30,7 @@ body {
   background: #525d70;
 }
 
-@media (max-width: 768px) {
+/* @media (max-width: 768px) {
   body {
     font-size: 14px;
     color: black;
@@ -38,8 +38,8 @@ body {
   .container {
     width: 95%;
   }
-}
-@media (min-width: 769px) {
+} */
+@media (min-width: 1200px) {
   body {
 font-size: 16px;
   }
