@@ -305,3 +305,45 @@ function clicked(element){
 
 
 
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('/sw.js')
+      .then(reg => console.log('Service Worker registered', reg))
+      .catch(err => console.log('Service Worker registration failed', err));
+  });
+}
+
+
+
+// Xử lý chơi nhạc ở nền trên iOS
+document.addEventListener('visibilitychange', () => {
+  if (document.visibilityState === 'hidden' && !mainAudio.paused) {
+    // Giữ audio chạy ở nền (iOS sẽ tự handle nếu là PWA)
+    mainAudio.play().catch(() => {});
+  }
+});
+
+// Bắt sự kiện khi màn hình tắt (dùng screen wake lock nếu hỗ trợ, nhưng iOS hạn chế)
+if ('wakeLock' in navigator) {
+  let wakeLock = null;
+  const requestWakeLock = async () => {
+    try {
+      wakeLock = await navigator.wakeLock.request('screen');
+      wakeLock.addEventListener('release', () => {
+        console.log('Wake Lock released');
+      });
+    } catch (err) {
+      console.error('Wake Lock failed:', err);
+    }
+  };
+
+  mainAudio.addEventListener('play', requestWakeLock);
+} else {
+  console.warn('Wake Lock API not supported (common on iOS)');
+}
+
+// Đảm bảo audio preload
+mainAudio.preload = 'auto';
+
+
+
