@@ -51,24 +51,8 @@
 
 
 
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  background: linear-gradient(135deg, #1a0933, #3c1a6d);
-  color: #fff;
-  overflow-x: hidden;
-}
 
-    html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-  background: linear-gradient(135deg, #1a0933, #3c1a6d);
-  color: #fff;
-  overflow-x: hidden;
-  position: relative;
-}
+
 
 /* Thêm padding vùng notch và thanh điều hướng */
 body {
@@ -103,12 +87,13 @@ body {
       height: 100%;
       top: 0;
       left: 0;
-      z-index: -1;
+      z-index: 0;
+        pointer-events: none;
     }
     
     .container {
       max-width: 1200px;
-      margin: 0 auto;
+      margin: auto;
       padding: 20px;
     }
     
@@ -822,7 +807,9 @@ body {
 </head>
 <body>
 
-
+<div class="main-content">
+    <!-- Nội dung chính -->
+  </div>
   
   
   <!-- Hiệu ứng hạt -->
