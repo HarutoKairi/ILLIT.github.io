@@ -163,6 +163,17 @@ body {
   color: #1f1f27; /* var(--white); */
 }
 
+
+
+.volume-control {
+  display: flex;
+  align-items: center;
+  margin-left: 10px;
+}
+#volume-slider {
+  width: 80px;
+  margin-left: 5px;
+}
 /*
 .img-area {
   width: 100%;
