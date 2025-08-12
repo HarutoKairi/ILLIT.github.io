@@ -31,6 +31,28 @@ html {
 }
 
 
+    html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: linear-gradient(135deg, #1a0933, #3c1a6d);
+  color: #fff;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Thêm lớp container riêng */
+.main-content {
+  min-height: calc(100dvh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+  padding-left: env(safe-area-inset-left);
+  padding-right: env(safe-area-inset-right);
+  position: relative; /* để nội dung không bị đè lên particles-js */
+  z-index: 1;
+}
+
+
 
 body {
   min-height: calc(100dvh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
