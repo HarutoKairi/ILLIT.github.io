@@ -88,15 +88,15 @@ let allMusic = [
         {
     name: "Almond Chocolate",
     artist: "ILLIT",
-    img: "Almond Chocolate",
-    src: "Almond Chocolate"
+    img: "AlmondChocolate",
+    src: "AlmondChocolate"
   }, 
 
       {
     name: "Almond Chocolate Korean Ver",
     artist: "ILLIT",
-    img: "Almond Chocolate KoreanVer",
-    src: "Almond Chocolate KoreanVer"
+    img: "AlmondChocolateKoreanVer",
+    src: "AlmondChocolateKoreanVer"
   }, 
 
     {
