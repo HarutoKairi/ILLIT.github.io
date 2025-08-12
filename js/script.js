@@ -1,42 +1,31 @@
 const wrapper = document.querySelector(".wrapper"),
-musicImg = wrapper.querySelector(".img-area img"),
-musicName = wrapper.querySelector(".song-details .name"),
-musicArtist = wrapper.querySelector(".song-details .artist"),
-playPauseBtn = wrapper.querySelector(".play-pause"),
-prevBtn = wrapper.querySelector("#prev"),
-nextBtn = wrapper.querySelector("#next"),
-mainAudio = wrapper.querySelector("#main-audio"),
-progressArea = wrapper.querySelector(".progress-area"),
-progressBar = progressArea.querySelector(".progress-bar"),
-musicList = wrapper.querySelector(".music-list"),
-moreMusicBtn = wrapper.querySelector("#more-music"),
-closemoreMusic = musicList.querySelector("#close");
+  musicImg = wrapper.querySelector(".img-area img"),
+  musicName = wrapper.querySelector(".song-details .name"),
+  musicArtist = wrapper.querySelector(".song-details .artist"),
+  playPauseBtn = wrapper.querySelector(".play-pause"),
+  prevBtn = wrapper.querySelector("#prev"),
+  nextBtn = wrapper.querySelector("#next"),
+  mainAudio = wrapper.querySelector("#main-audio"),
+  progressArea = wrapper.querySelector(".progress-area"),
+  progressBar = progressArea.querySelector(".progress-bar"),
+  musicList = wrapper.querySelector(".music-list"),
+  moreMusicBtn = wrapper.querySelector("#more-music"),
+  closemoreMusic = musicList.querySelector("#close");
 
 let audioContext;
 let gainNode;
 let audioSource;
 
-
-
-const playButton = document.getElementById('playButton');
-if (playButton) {
-  playButton.addEventListener('click', () => {
-    // xử lý khi nhấn nút
-  });
-}
-
-
-
 const volumeSlider = document.querySelector("#volume-slider");
 const volumeIcon = document.querySelector("#volume-icon");
 
-if (volumeSlider) {
+if (volumeSlider && volumeIcon) {
   volumeSlider.addEventListener("input", () => {
     const volumeValue = parseFloat(volumeSlider.value);
     if (gainNode) {
-      gainNode.gain.value = volumeValue; // Sử dụng gain thay vì audio.volume
+      gainNode.gain.value = volumeValue;
     } else {
-      mainAudio.volume = volumeValue; // Fallback cho non-iOS
+      mainAudio.volume = volumeValue;
     }
 
     if (volumeValue === 0) {
@@ -47,70 +36,31 @@ if (volumeSlider) {
       volumeIcon.innerText = "volume_up";
     }
   });
-}
-
-
-
-
-/*
-const btn = document.getElementById('play-btn');
-btn?.addEventListener('click', handlePlay);
-
-const btn = document.querySelector('#play-btn');
-if (btn) {
-  btn.addEventListener('click', handlePlay);
 } else {
-  console.warn('Không tìm thấy #play-btn trong DOM');
+  console.warn('Volume slider or icon not found in DOM');
 }
-*/
-
-document.addEventListener('DOMContentLoaded', () => {
-  const btn = document.querySelector('#play-btn');
-  if (btn) {
-    btn.addEventListener('click', handlePlay);
-  }
-});
-
-
-/*
-document.addEventListener('DOMContentLoaded', () => {
-  const playButton = document.querySelector('.play-pause');
-  if (playButton) {
-    playButton.addEventListener('click', () => {
-      // hành động khi nhấn nút phát/tạm dừng
-    });
-  }
-});
-*/
-
 
 let musicIndex = Math.floor((Math.random() * allMusic.length) + 1);
-isMusicPaused = true;
+let isMusicPaused = true;
 
-window.addEventListener("load", ()=>{
+window.addEventListener("load", () => {
   loadMusic(musicIndex);
-  playingSong(); 
+  playingSong();
 });
 
-
-
-
-
-function loadMusic(indexNumb){
+function loadMusic(indexNumb) {
   musicName.innerText = allMusic[indexNumb - 1].name;
   musicArtist.innerText = allMusic[indexNumb - 1].artist;
   musicImg.src = `images/${allMusic[indexNumb - 1].src}.jpg`;
   mainAudio.src = `songs/${allMusic[indexNumb - 1].src}.mp3`;
 
-  // Khởi tạo hoặc reset Web Audio API
   if (!audioContext) {
     audioContext = new (window.AudioContext || window.webkitAudioContext)();
     gainNode = audioContext.createGain();
     gainNode.connect(audioContext.destination);
-    gainNode.gain.value = 1; // Volume mặc định 100%
+    gainNode.gain.value = 1;
   }
 
-  // Reset source nếu đang tồn tại
   if (audioSource) {
     audioSource.disconnect();
   }
@@ -118,16 +68,14 @@ function loadMusic(indexNumb){
   audioSource = audioContext.createMediaElementSource(mainAudio);
   audioSource.connect(gainNode);
 
-  // Preload audio
   mainAudio.preload = 'auto';
   mainAudio.load();
 }
 
-function playMusic(){
+function playMusic() {
   wrapper.classList.add("paused");
   playPauseBtn.querySelector("i").innerText = "pause";
 
-  // Resume AudioContext nếu bị suspended (yêu cầu trên iOS)
   if (audioContext.state === 'suspended') {
     audioContext.resume().then(() => {
       mainAudio.play().catch(err => console.error('Play failed:', err));
@@ -137,41 +85,11 @@ function playMusic(){
   }
 }
 
-function pauseMusic(){
+function pauseMusic() {
   wrapper.classList.remove("paused");
   playPauseBtn.querySelector("i").innerText = "play_arrow";
   mainAudio.pause();
 }
-
-
-
-
-/*
-function loadMusic(indexNumb){
-  musicName.innerText = allMusic[indexNumb - 1].name;
-  musicArtist.innerText = allMusic[indexNumb - 1].artist;
-  musicImg.src = `images/${allMusic[indexNumb - 1].src}.jpg`;
-  mainAudio.src = `songs/${allMusic[indexNumb - 1].src}.mp3`;
-}
-
-
-*/
-/*
-  
-function playMusic(){
-  wrapper.classList.add("paused");
-  playPauseBtn.querySelector("i").innerText = "pause";
-  mainAudio.play();
-}
-
-function pauseMusic(){
-  wrapper.classList.remove("paused");
-  playPauseBtn.querySelector("i").innerText = "play_arrow";
-  mainAudio.pause();
-}
-
-*/
-
 
 function prevMusic() {
   musicIndex--;
@@ -181,56 +99,34 @@ function prevMusic() {
   playingSong();
 }
 
-
-
-/*
-function prevMusic(){
-  musicIndex--; 
-  musicIndex < 1 ? musicIndex = allMusic.length : musicIndex = musicIndex;
+function nextMusic() {
+  musicIndex++;
+  musicIndex > allMusic.length ? (musicIndex = 1) : (musicIndex = musicIndex);
   loadMusic(musicIndex);
   playMusic();
-  playingSong(); 
+  playingSong();
 }
 
-*/
-
-function nextMusic(){
-  musicIndex++; 
-  musicIndex > allMusic.length ? musicIndex = 1 : musicIndex = musicIndex;
-  loadMusic(musicIndex);
-  playMusic();
-  playingSong(); 
-}
-
-playPauseBtn.addEventListener("click", ()=>{
+playPauseBtn.addEventListener("click", () => {
   const isMusicPlay = wrapper.classList.contains("paused");
   isMusicPlay ? pauseMusic() : playMusic();
   playingSong();
 
-// Khởi tạo AudioContext chỉ sau click (yêu cầu của iOS)
   if (!audioContext) {
-    loadMusic(musicIndex); // Gọi lại để init Web Audio
-
+    loadMusic(musicIndex);
   }
 });
 
-prevBtn.addEventListener("click", ()=>{
+prevBtn.addEventListener("click", () => {
   prevMusic();
 });
 
-nextBtn.addEventListener("click", ()=>{
+nextBtn.addEventListener("click", () => {
   nextMusic();
 });
 
-
-
-
-
-
-
-// Thêm một lần, bên ngoài các listener khác
 mainAudio.addEventListener("loadeddata", () => {
-  let musicDuration = wrapper.querySelector(".max-duration");  // Sửa lỗi chính tả cho rõ ràng
+  let musicDuration = wrapper.querySelector(".max-duration");
   let mainAdDuration = mainAudio.duration;
   let totalMin = Math.floor(mainAdDuration / 60);
   let totalSec = Math.floor(mainAdDuration % 60);
@@ -240,7 +136,6 @@ mainAudio.addEventListener("loadeddata", () => {
   musicDuration.innerText = `${totalMin}:${totalSec}`;
 });
 
-// Sau đó, listener timeupdate (không có loadeddata lồng)
 mainAudio.addEventListener("timeupdate", (e) => {
   const currentTime = e.target.currentTime;
   const duration = e.target.duration;
@@ -256,55 +151,20 @@ mainAudio.addEventListener("timeupdate", (e) => {
   musicCurrentTime.innerText = `${currentMin}:${currentSec}`;
 });
 
+progressArea.addEventListener("click", (e) => {
+  let progressWidth = progressArea.clientWidth;
+  let clickedOffsetX = e.offsetX;
+  let songDuration = mainAudio.duration;
 
-
-// SỬA LỖI PHẦN PROGRESS BAR 
-/*
-mainAudio.addEventListener("timeupdate", (e)=>{
-  const currentTime = e.target.currentTime; 
-  const duration = e.target.duration; 
-  let progressWidth = (currentTime / duration) * 100;
-  progressBar.style.width = `${progressWidth}%`;
-
-  let musicCurrentTime = wrapper.querySelector(".current-time"),
-  musicDuartion = wrapper.querySelector(".max-duration");
-  mainAudio.addEventListener("loadeddata", ()=>{
-   
-    let mainAdDuration = mainAudio.duration;
-    let totalMin = Math.floor(mainAdDuration / 60);
-    let totalSec = Math.floor(mainAdDuration % 60);
-    if(totalSec < 10){ 
-      totalSec = `0${totalSec}`;
-    }
-    musicDuartion.innerText = `${totalMin}:${totalSec}`;
-  });
-  
-  let currentMin = Math.floor(currentTime / 60);
-  let currentSec = Math.floor(currentTime % 60);
-  if(currentSec < 10){ 
-    currentSec = `0${currentSec}`;
-  }
-  musicCurrentTime.innerText = `${currentMin}:${currentSec}`;
-});
-
-*/
-
-// SỬA LỖI CLICK TRÊN PROGRESS AREA
-progressArea.addEventListener("click", (e)=>{
-  let progressWidth = progressArea.clientWidth; 
-  let clickedOffsetX = e.offsetX; 
-  let songDuration = mainAudio.duration; 
-  
   mainAudio.currentTime = (clickedOffsetX / progressWidth) * songDuration;
-  playMusic(); 
+  playMusic();
   playingSong();
 });
 
-// PHẦN CÒN LẠI GIỮ NGUYÊN
 const repeatBtn = wrapper.querySelector("#repeat-plist");
-repeatBtn.addEventListener("click", ()=>{
-  let getText = repeatBtn.innerText; 
-  switch(getText){
+repeatBtn.addEventListener("click", () => {
+  let getText = repeatBtn.innerText;
+  switch (getText) {
     case "repeat":
       repeatBtn.innerText = "repeat_one";
       repeatBtn.setAttribute("title", "Song looped");
@@ -320,23 +180,23 @@ repeatBtn.addEventListener("click", ()=>{
   }
 });
 
-mainAudio.addEventListener("ended", ()=>{
-  let getText = repeatBtn.innerText; 
-  switch(getText){
+mainAudio.addEventListener("ended", () => {
+  let getText = repeatBtn.innerText;
+  switch (getText) {
     case "repeat":
       nextMusic();
       break;
     case "repeat_one":
-      mainAudio.currentTime = 0; 
-      loadMusic(musicIndex); 
-      playMusic(); 
+      mainAudio.currentTime = 0;
+      loadMusic(musicIndex);
+      playMusic();
       break;
     case "shuffle":
-      let randIndex = Math.floor((Math.random() * allMusic.length) + 1); 
-      do{
+      let randIndex = Math.floor((Math.random() * allMusic.length) + 1);
+      do {
         randIndex = Math.floor((Math.random() * allMusic.length) + 1);
-      }while(musicIndex == randIndex); 
-      musicIndex = randIndex; 
+      } while (musicIndex == randIndex);
+      musicIndex = randIndex;
       loadMusic(musicIndex);
       playMusic();
       playingSong();
@@ -344,10 +204,10 @@ mainAudio.addEventListener("ended", ()=>{
   }
 });
 
-moreMusicBtn.addEventListener("click", ()=>{
+moreMusicBtn.addEventListener("click", () => {
   musicList.classList.toggle("show");
 });
-closemoreMusic.addEventListener("click", ()=>{
+closemoreMusic.addEventListener("click", () => {
   moreMusicBtn.click();
 });
 
@@ -361,36 +221,36 @@ for (let i = 0; i < allMusic.length; i++) {
                 <span id="${allMusic[i].src}" class="audio-duration"></span>
                 <audio class="${allMusic[i].src}" src="songs/${allMusic[i].src}.mp3"></audio>
               </li>`;
-  ulTag.insertAdjacentHTML("beforeend", liTag); 
+  ulTag.insertAdjacentHTML("beforeend", liTag);
 
   let liAudioDurationTag = ulTag.querySelector(`#${allMusic[i].src}`);
   let liAudioTag = ulTag.querySelector(`.${allMusic[i].src}`);
-  
-  liAudioTag.addEventListener("loadeddata", ()=>{
+
+  liAudioTag.addEventListener("loadeddata", () => {
     let duration = liAudioTag.duration;
     let totalMin = Math.floor(duration / 60);
     let totalSec = Math.floor(duration % 60);
-    if(totalSec < 10){ 
+    if (totalSec < 10) {
       totalSec = `0${totalSec}`;
-    };
-    liAudioDurationTag.innerText = `${totalMin}:${totalSec}`; 
-    liAudioDurationTag.setAttribute("t-duration", `${totalMin}:${totalSec}`); 
+    }
+    liAudioDurationTag.innerText = `${totalMin}:${totalSec}`;
+    liAudioDurationTag.setAttribute("t-duration", `${totalMin}:${totalSec}`);
   });
 }
 
-function playingSong(){
+function playingSong() {
   const allLiTag = ulTag.querySelectorAll("li");
-  
+
   for (let j = 0; j < allLiTag.length; j++) {
     let audioTag = allLiTag[j].querySelector(".audio-duration");
-    
-    if(allLiTag[j].classList.contains("playing")){
+
+    if (allLiTag[j].classList.contains("playing")) {
       allLiTag[j].classList.remove("playing");
       let adDuration = audioTag.getAttribute("t-duration");
       audioTag.innerText = adDuration;
     }
-    
-    if(allLiTag[j].getAttribute("li-index") == musicIndex){
+
+    if (allLiTag[j].getAttribute("li-index") == musicIndex) {
       allLiTag[j].classList.add("playing");
       audioTag.innerText = "Playing";
     }
@@ -399,7 +259,7 @@ function playingSong(){
   }
 }
 
-function clicked(element){
+function clicked(element) {
   let getLiIndex = element.getAttribute("li-index");
   musicIndex = getLiIndex;
   loadMusic(musicIndex);
@@ -407,27 +267,26 @@ function clicked(element){
   playingSong();
 }
 
-
-
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js')
       .then(reg => console.log('Service Worker registered', reg))
-      .catch(err => console.log('Service Worker registration failed', err));
+      .catch(err => console.error('Service Worker registration failed:', err));
   });
 }
 
-
-
-// Xử lý chơi nhạc ở nền trên iOS
 document.addEventListener('visibilitychange', () => {
   if (document.visibilityState === 'hidden' && !mainAudio.paused) {
-    // Giữ audio chạy ở nền (iOS sẽ tự handle nếu là PWA)
     mainAudio.play().catch(() => {});
+  } else if (document.visibilityState === 'visible' && !mainAudio.paused) {
+    if (audioContext.state === 'suspended') {
+      audioContext.resume().then(() => {
+        mainAudio.play().catch(err => console.error('Resume failed:', err));
+      });
+    }
   }
 });
 
-// Bắt sự kiện khi màn hình tắt (dùng screen wake lock nếu hỗ trợ, nhưng iOS hạn chế)
 if ('wakeLock' in navigator) {
   let wakeLock = null;
   const requestWakeLock = async () => {
@@ -440,14 +299,7 @@ if ('wakeLock' in navigator) {
       console.error('Wake Lock failed:', err);
     }
   };
-
   mainAudio.addEventListener('play', requestWakeLock);
 } else {
-  console.warn('Wake Lock API not supported (common on iOS)');
+  console.warn('Wake Lock API not supported (e.g., on iOS Safari)');
 }
-
-// Đảm bảo audio preload
-mainAudio.preload = 'auto';
-
-
-
