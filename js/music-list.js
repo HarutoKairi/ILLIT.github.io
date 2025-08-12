@@ -99,6 +99,13 @@ let allMusic = [
     src: "Almond Chocolate KoreanVer"
   }, 
 
+    {
+    name: "Jellyous",
+    artist: "ILLIT",
+    img: "Jellyous",
+    src: "Jellyous"
+  }, 
+
   
 
 ];
