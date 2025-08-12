@@ -85,6 +85,13 @@ let allMusic = [
     src: "IwillLikeYou"
   }, 
 
+        {
+    name: "Almond Chocolate",
+    artist: "ILLIT",
+    img: "Almond Chocolate",
+    src: "Almond Chocolate"
+  }, 
+
       {
     name: "Almond Chocolate (Korean Ver.)",
     artist: "ILLIT",
