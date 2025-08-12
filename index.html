@@ -28,6 +28,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
 
+/* for iOS */
+     :root{
+      --sat: env(safe-area-inset-top);
+      --sab: env(safe-area-inset-bottom);
+      --sar: env(safe-area-inset-right);
+      --sal: env(safe-area-inset-left);
+      --vh: 1vh; /* fallback JS */
+    }
+    
+  html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      background: #1f1f27;
+      color: #fff;
+    }
+
+
+   
+
+
   
     
     * {
@@ -36,6 +57,12 @@
       box-sizing: border-box;
       font-family: 'Poppins', sans-serif;
     }
+
+
+
+
+
+    
     
     body {
       height: -webkit-fill-available;
@@ -44,6 +71,8 @@
       overflow-x: hidden;
       position: relative;
     }
+
+    
     
     /* Hiệu ứng hạt */
     #particles-js {
@@ -770,6 +799,19 @@
   </style>
 </head>
 <body>
+
+
+  
+
+
+
+
+
+
+
+
+
+  
   <!-- Hiệu ứng hạt -->
   <div id="particles-js"></div>
   
