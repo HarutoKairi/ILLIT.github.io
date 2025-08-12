@@ -21,25 +21,6 @@ if (playButton) {
 }
 
 
-
-
-const volumeSlider = document.querySelector("#volume-slider");
-const volumeIcon = document.querySelector("#volume-icon");
-
-if (volumeSlider) {
-  volumeSlider.addEventListener("input", () => {
-    mainAudio.volume = volumeSlider.value;
-    if (mainAudio.volume === 0) {
-      volumeIcon.innerText = "volume_off";
-    } else if (mainAudio.volume < 0.5) {
-      volumeIcon.innerText = "volume_down";
-    } else {
-      volumeIcon.innerText = "volume_up";
-    }
-  });
-}
-
-
 /*
 const btn = document.getElementById('play-btn');
 btn?.addEventListener('click', handlePlay);
