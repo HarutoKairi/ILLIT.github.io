@@ -23,8 +23,11 @@
   --lightbshadow: rgba(0, 0, 0, 0.15);
 }
 
+
 html {
-  overflow-y: scroll;
+  font-family: var(--ff-inter);
+  font-size: 10px;
+  scroll-behavior: smooth;
 }
 
 html, body {
