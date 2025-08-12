@@ -21,6 +21,12 @@
   --darkwhite: #cecaca;
   --pinkshadow: #ffcbdd;
   --lightbshadow: rgba(0, 0, 0, 0.15);
+
+       --sat: env(safe-area-inset-top);
+      --sab: env(safe-area-inset-bottom);
+      --sar: env(safe-area-inset-right);
+      --sal: env(safe-area-inset-left);
+      --vh: 1vh; /* fallback JS */
 }
 
 
