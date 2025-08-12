@@ -365,7 +365,7 @@ Này là cái nút mà bấm vô sẽ hiện list nhạc í  */
 }
 .music-list ul {
   margin: 10px 0;
-  max-height: 1000px;
+  max-height: 100%;
   overflow-y: auto; /* Chỉnh sửa: Thay đổi từ overflow: auto thành overflow-y: auto để cuộn theo chiều dọc, tránh cuộn ngang nếu cần */
   scrollbar-width: thin; /* Hiển thị thanh cuộn mỏng cho Firefox */
   scrollbar-color: var(--violet) var(--lightback); /* Màu thanh cuộn cho Firefox */
