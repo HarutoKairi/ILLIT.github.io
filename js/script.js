@@ -12,6 +12,11 @@ musicList = wrapper.querySelector(".music-list"),
 moreMusicBtn = wrapper.querySelector("#more-music"),
 closemoreMusic = musicList.querySelector("#close");
 
+let audioContext;
+let gainNode;
+let audioSource;
+
+
 
 const playButton = document.getElementById('playButton');
 if (playButton) {
@@ -22,22 +27,29 @@ if (playButton) {
 
 
 
-
 const volumeSlider = document.querySelector("#volume-slider");
 const volumeIcon = document.querySelector("#volume-icon");
 
 if (volumeSlider) {
   volumeSlider.addEventListener("input", () => {
-    mainAudio.volume = volumeSlider.value;
-    if (mainAudio.volume === 0) {
+    const volumeValue = parseFloat(volumeSlider.value);
+    if (gainNode) {
+      gainNode.gain.value = volumeValue; // Sử dụng gain thay vì audio.volume
+    } else {
+      mainAudio.volume = volumeValue; // Fallback cho non-iOS
+    }
+
+    if (volumeValue === 0) {
       volumeIcon.innerText = "volume_off";
-    } else if (mainAudio.volume < 0.5) {
+    } else if (volumeValue < 0.5) {
       volumeIcon.innerText = "volume_down";
     } else {
       volumeIcon.innerText = "volume_up";
     }
   });
 }
+
+
 
 
 /*
@@ -80,6 +92,61 @@ window.addEventListener("load", ()=>{
   playingSong(); 
 });
 
+
+
+
+
+function loadMusic(indexNumb){
+  musicName.innerText = allMusic[indexNumb - 1].name;
+  musicArtist.innerText = allMusic[indexNumb - 1].artist;
+  musicImg.src = `images/${allMusic[indexNumb - 1].src}.jpg`;
+  mainAudio.src = `songs/${allMusic[indexNumb - 1].src}.mp3`;
+
+  // Khởi tạo hoặc reset Web Audio API
+  if (!audioContext) {
+    audioContext = new (window.AudioContext || window.webkitAudioContext)();
+    gainNode = audioContext.createGain();
+    gainNode.connect(audioContext.destination);
+    gainNode.gain.value = 1; // Volume mặc định 100%
+  }
+
+  // Reset source nếu đang tồn tại
+  if (audioSource) {
+    audioSource.disconnect();
+  }
+
+  audioSource = audioContext.createMediaElementSource(mainAudio);
+  audioSource.connect(gainNode);
+
+  // Preload audio
+  mainAudio.preload = 'auto';
+  mainAudio.load();
+}
+
+function playMusic(){
+  wrapper.classList.add("paused");
+  playPauseBtn.querySelector("i").innerText = "pause";
+
+  // Resume AudioContext nếu bị suspended (yêu cầu trên iOS)
+  if (audioContext.state === 'suspended') {
+    audioContext.resume().then(() => {
+      mainAudio.play().catch(err => console.error('Play failed:', err));
+    });
+  } else {
+    mainAudio.play().catch(err => console.error('Play failed:', err));
+  }
+}
+
+function pauseMusic(){
+  wrapper.classList.remove("paused");
+  playPauseBtn.querySelector("i").innerText = "play_arrow";
+  mainAudio.pause();
+}
+
+
+
+
+/*
 function loadMusic(indexNumb){
   musicName.innerText = allMusic[indexNumb - 1].name;
   musicArtist.innerText = allMusic[indexNumb - 1].artist;
@@ -87,6 +154,10 @@ function loadMusic(indexNumb){
   mainAudio.src = `songs/${allMusic[indexNumb - 1].src}.mp3`;
 }
 
+
+*/
+/*
+  
 function playMusic(){
   wrapper.classList.add("paused");
   playPauseBtn.querySelector("i").innerText = "pause";
@@ -99,6 +170,8 @@ function pauseMusic(){
   mainAudio.pause();
 }
 
+*/
+
 
 function prevMusic() {
   musicIndex--;
@@ -107,6 +180,8 @@ function prevMusic() {
   playMusic();
   playingSong();
 }
+
+
 
 /*
 function prevMusic(){
@@ -131,6 +206,12 @@ playPauseBtn.addEventListener("click", ()=>{
   const isMusicPlay = wrapper.classList.contains("paused");
   isMusicPlay ? pauseMusic() : playMusic();
   playingSong();
+
+// Khởi tạo AudioContext chỉ sau click (yêu cầu của iOS)
+  if (!audioContext) {
+    loadMusic(musicIndex); // Gọi lại để init Web Audio
+
+  }
 });
 
 prevBtn.addEventListener("click", ()=>{
@@ -140,6 +221,10 @@ prevBtn.addEventListener("click", ()=>{
 nextBtn.addEventListener("click", ()=>{
   nextMusic();
 });
+
+
+
+
 
 
 
