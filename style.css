@@ -23,6 +23,9 @@
   --lightbshadow: rgba(0, 0, 0, 0.15);
 }
 
+html {
+  overflow-y: scroll;
+}
 
 html, body {
   height: 100%;
