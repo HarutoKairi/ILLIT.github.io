@@ -13,6 +13,22 @@ moreMusicBtn = wrapper.querySelector("#more-music"),
 closemoreMusic = musicList.querySelector("#close");
 
 
+
+
+
+// Modernizr-style feature detection
+if ('CSS' in window && 'supports' in window.CSS) {
+  document.documentElement.classList.add('css-vars');
+}
+
+if ('ontouchstart' in window) {
+  document.documentElement.classList.add('touch-device');
+}
+
+
+
+
+
 const playButton = document.getElementById('playButton');
 if (playButton) {
   playButton.addEventListener('click', () => {
@@ -34,6 +50,10 @@ if (btn) {
 */
 
 document.addEventListener('DOMContentLoaded', () => {
+
+
+
+  
   const btn = document.querySelector('#play-btn');
   if (btn) {
     btn.addEventListener('click', handlePlay);
@@ -196,6 +216,12 @@ progressArea.addEventListener("click", (e)=>{
   playingSong();
 });
 
+
+
+
+
+
+
 // PHẦN CÒN LẠI GIỮ NGUYÊN
 const repeatBtn = wrapper.querySelector("#repeat-plist");
 repeatBtn.addEventListener("click", ()=>{
@@ -305,13 +331,7 @@ function clicked(element){
 
 
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('/sw.js')
-      .then(reg => console.log('Service Worker registered', reg))
-      .catch(err => console.log('Service Worker registration failed', err));
-  });
-}
+
 
 
 

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,6 +14,25 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <link rel="manifest" href="manifest.json">
+  <!-- Apple Touch Icon -->
+<link rel="apple-touch-icon" href="icon.png">
+
+<!-- Safari Pinned Tab -->
+<link rel="mask-icon" href="icon.svg" color="#ff6ec4">
+
+<!-- iOS Status Bar Style -->
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<!-- iOS Web App Capable -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+
+<!-- iOS Splash Screen (tùy chọn) -->
+<link rel="apple-touch-startup-image" href="splash.png">
+
+  
 
 <!-- Chrome/Android -->
 <meta name="mobile-web-app-capable" content="yes">
@@ -58,30 +76,18 @@
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  background: #1a0933;
-  backdrop-filter: blur(8px); /* Tạo hiệu ứng mờ */
-  -webkit-backdrop-filter: blur(20px); /* Cho Safari */
+  height: -webkit-fill-available;
+/*  backdrop-filter: blur(10px);  Tạo hiệu ứng mờ */
+  background: #3c1a6d;
   color: #fff;
   overflow-x: hidden;
   position: relative;
 }
 
-/* Thêm padding vùng notch và thanh điều hướng */
-body {
-  min-height: calc(100dvh + env(safe-area-inset-top) + env(safe-area-inset-bottom));
-  padding-top: env(safe-area-inset-top);
-  padding-bottom: env(safe-area-inset-bottom);
-  padding-left: env(safe-area-inset-left);
-  padding-right: env(safe-area-inset-right);
-  box-sizing: border-box;
-   background: linear-gradient(135deg, #1a0933, #3c1a6d);
-   color: #fff; 
-}
 
 
 
-    
+  
     /*
     body {
       height: 100%;
@@ -216,8 +222,8 @@ body {
 
 
     .wrapper {
-  background: rgba(30, 20, 60, 0.7);
-  backdrop-filter: blur(8px);
+  background: rgb(135 135 135 / 5%);
+  backdrop-filter: blur(2px);
   border-radius: 25px;
   box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
   max-width: 450px;
@@ -479,8 +485,8 @@ body {
 
     .music-list {
   position: absolute;
-  background: rgba(42, 36, 63, 0.5);  /* rgb(42 36 63 / 50%) */
-  backdrop-filter: blur(10px);
+  background: rgb(58 28 101 / 80%);  /* rgb(42 36 63 / 50%) */
+  backdrop-filter: blur(6px);
   width: 100%;
   /* height: 600px;  Đổi từ 100% thành auto để tự mở rộng theo nội dung 
  min-height: auto;   Đảm bảo ít nhất bằng parent */
@@ -725,116 +731,20 @@ body {
       margin-bottom: 10px;
     }
     
-    /* Responsive */
-    @media (max-width: 768px) {
-      .logo {
-        font-size: 2.5rem;
-      }
-      
-      .wrapper {
-        max-width: 100%;
-      }
-      
-      .img-area {
-        width: 250px;
-        height: 250px;
-      }
-      
-      .members {
-        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      }
-      
-      .member-img {
-        height: 170px;
-      }
-    }
     
-    @media (max-width: 480px) {
-      .logo {
-        font-size: 2rem;
-      }
-      
-      .subtitle {
-        font-size: 1rem;
-      }
-      
-      .img-area {
-        width: 200px;
-        height: 200px;
-      }
-      
-      .controls i {
-        margin: 0 10px;
-      }
-      
-      .play-pause {
-        width: 50px;
-        height: 50px;
-      }
-      
-      .play-pause i {
-        font-size: 28px;
-      }
-    }
-    /* ILLIT effect */
-    .illit-effect {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      pointer-events: none;
-      z-index: -1;
-      background: radial-gradient(circle at center, rgba(255, 110, 196, 0.1) 0%, transparent 70%);
-      animation: pulse 5s infinite ease-in-out;
-    }
-    
+
     @keyframes pulse {
       0% { opacity: 0; transform: scale(0.8); }
       50% { opacity: 1; transform: scale(1); }
       100% { opacity: 0; transform: scale(1.2); }
     }
     
-    /* Volume control */
-    .volume-control {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 10px;
-    }
-    
-    .volume-control i {
-      font-size: 24px;
-      margin-right: 10px;
-      color: #d0cde7;
-    }
-    
-    .volume-control input[type="range"] {
-      width: 200px;
-      height: 8px;
-      background: rgb(255 255 255 / 25%);
-      border-radius: 20px;
-      outline: none;
-      cursor: pointer;
-      appearance: none;
-    }
-    
-    .volume-control input[type="range"]::-webkit-slider-thumb {
-      appearance: none;
-      width: 12px;
-      height: 12px;
-      background: #ff6ec4;
-      border-radius: 50%;
-    }
+
   </style>
 </head>
 <body>
 
-<div class="main-content">
-    <!-- Nội dung chính -->
-  </div>
-  
-  
+
   <!-- Hiệu ứng hạt -->
   <div id="particles-js"></div>
   
@@ -892,11 +802,7 @@ body {
           <i id="more-music" class="material-icons" >queue_music</i>
         </div>
         
-        <div class="volume-control">
-          <i class="material-icons">volume_up</i>
-          <input type="range" id="volume-slider" min="0" max="1" step="0.01" value="1">
-        </div>
-
+     
         <div class="music-list">
           <div class="header">
             <div class="row">
@@ -1108,12 +1014,7 @@ body {
       });
     });
     
-    // Volume control
-    const audio = document.getElementById('main-audio');
-    const volumeSlider = document.getElementById('volume-slider');
-    volumeSlider.addEventListener('input', () => {
-      audio.volume = volumeSlider.value;
-    });
+   
     
     // Clear cache and reload button
     const clearCacheBtn = document.createElement('i');

@@ -1,22 +1,40 @@
 {
   "name": "ILLIT Music Player",
   "short_name": "ILLIT Player",
-  "description": "ILLIT",
+  "description": "Trình phát nhạc chính thức của nhóm ILLIT",
   "start_url": "/index.html",
+  "scope": "/",
   "display": "standalone",
   "background_color": "#1a0933",
-  "theme_color": "#3c1a6d",
+  "theme_color": "#1f1f27",
   "orientation": "portrait",
   "icons": [
     {
       "src": "icon.png",
       "sizes": "192x192",
-      "type": "png"
+      "type": "image/png",
+      "purpose": "any maskable"
     },
     {
       "src": "icon.png",
       "sizes": "512x512",
-      "type": "png"
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
-  ]
+  ],
+  "screenshots": [
+    {
+      "src": "screenshot.png",
+      "sizes": "1080x1920",
+      "type": "image/png"
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
 }
